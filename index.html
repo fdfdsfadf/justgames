@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="description" content="Cat-Nitro, the place for games, cats, and stuff">
     <meta name="keywords" content="pwa">
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="no">
     <meta name="author" content="Cat-Nitro">
     <meta name="copyright" content="CatMan">
     <meta name="robots" content="follow">
@@ -18,9 +18,14 @@
     <link rel="icon" type="image/x-icon" href="assets/img/filtered-logo-512.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="assets/css/average-css.css">
+
+    <!-- Inline overrides & new styles -->
     <style>
         :root {
             --theme: #000000;
+            /* ✨ Hover‑effect tuning variables – tweak anytime! */
+            --hover-scale: 1.2;      /* how large the tile grows on hover */
+            --hover-duration: 0.25s; /* animation speed (seconds) */
         }
         a {
             text-decoration: none;
@@ -47,33 +52,79 @@
             animation: scrollText linear infinite;
         }
         @keyframes scrollText {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
+
+        /* ===== new look & feel for game tiles ===== */
+        .game-list a {
+            width: 22%;               /* slightly narrower */
+            padding: 4px 0;           /* not so chunky */
+            border-radius: 15px;      /* rounded corners */
+            border-width: 1px;        /* thinner border */
+            margin: 4px 0;            /* breathing room */
+
+            /* hover animation prep */
+            display: inline-block;    /* ensure transform works */
+            position: relative;       /* allow z-index stacking */
+            transition: transform var(--hover-duration) ease, box-shadow var(--hover-duration) ease;
+            will-change: transform;   /* performance hint */
+        }
+
+        /* ===== Glow‑up hover effect ===== */
+        .game-list a:hover {
+            transform: scale(var(--hover-scale));
+            z-index: 10; /* sit on top of neighbours */
+            box-shadow: 0 0 12px 4px #1eff00; /* neon glow */
+        }
+
+        /* ===== Search bar styles ===== */
+        .search-bar {
+            width: 60%;
+            max-width: 500px;
+            padding: 10px 15px;
+            font-size: 20px;
+            background-color: #000000;
+            color: #d400ff;
+            border: 1px solid #4400ff;
+            border-radius: 15px;
+            outline: none;
+        }
+        .search-bar::placeholder { color: #4400ff; }
     </style>
-</head>
+
+<script type="module" src="scene.js"></script>
 
 <body>
+    <!-- Hidden festive video container left untouched -->
     <div id="videoContainer" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <video id="randomVideo" src="assets/music/mariah.mp4" width="640" height="360" controls></video>
     </div>
 
-    <!-- Message of the Day Scroller -->
-    <div class="motd-container">
-        <div class="motd-text">
-        Updated ^_^ </div> <!-- this div is important for some reaosn? dont remove it.-->
+    <!-- Message‑of‑the‑Day scroller -->
+    <div class="motd-container"><div class="motd-text"> THE NETHER. </div></div>
+
+    <!-- Logo & site title -->
+    <center>
+        <img src="assets/img/filtered-logo-512.png" class="front" alt="Cat‑Nitro logo" style="width:125px;height:125px;margin-top:20px;">
+        <h1 class="flick"><b>Cat‑Nitro Games</b></h1>
+    </center>
+
+    <!-- FIRST rule -->
+    <hr style="height:2px;border-width:0;color:white;background-color:blue">
+
+    <!-- ===== Search bar goes here ===== -->
+    <div class="search-wrapper">
+        <center>
+            <input type="text" id="gameSearch" class="search-bar" placeholder="Search games… (e.g., retro bowl)">
+        </center>
     </div>
 
-    <center><img src="assets/img/filtered-logo-512.png" class="front" alt="originally made by some guy, stolen from another, now it's me :D" style="width:125px;height:125px;margin-top:20px;">
-        <b><h1 class="flick">Cat-Nitro Games</h1></b>
-    </center>
-    
+    <!-- SECOND rule -->
     <hr style="height:2px;border-width:0;color:white;background-color:blue">
-    <center>
+
+    <!-- ===== Game list (unchanged) ===== -->
+    <center class="game-list">
         <a href="games/1v1lol/index.html">
 
             <b><p class="link">1v1lol</p></b>
@@ -317,7 +368,7 @@
       </a>
     
       <a href="games/game-inside/index.html">
-          <b><p class="link">Game Inside a Game Inside..</p></b> 
+          <b><p class="link">Game Inside a Game</p></b> 
       </a>
 
     
@@ -592,13 +643,15 @@
 
     <div class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        fixed all the games besides emulators that were broke. Made stuff a bit more professional, and made all the logos and styles consistant across the entire website ^_^ (removed news cause i dont feel like it)
-
+        Hi guysss!!! I know its been a while, and we've had a domain change and blocking and stuff, but i finally got the motivation to add a search feature! I'm working on a new UI update (<a href="/polls.html">you guys want that?</a>) and, working on adding some new games and opening another game reccomendation system. Have FUN!
+        <br>
+        <center>
+            <img src="/assets/img/filtered-logo-512.png">
+        </center>
     </div>
     
           <font color="blue">
           <h1><p class="link"><center>Emulators/Others</center></p></h1></font>
-          <h2><p class="link"><center>Links not working will have a * next to them!</center></p></h2></font>
           <hr style="height:2px;border-width:0;color:white;background-color:blue">
     
         <center>
@@ -646,40 +699,56 @@
 
 
         
-                
-
-    <script>
-        // MOTD Scroll Speed Adjustment
-        const motdText = document.querySelector('.motd-text');
-        const speed = 20; // Adjust scrolling speed here
-        const textLength = motdText.offsetWidth;
-        const containerWidth = document.querySelector('.motd-container').offsetWidth;
-        const duration = (textLength + containerWidth) / speed;
-        motdText.style.animationDuration = `${30}s`;
-
-        // ServiceWorker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js').then(function(registration) {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                    registration.pushManager.getSubscription().then(function(sub) {
-                        if (sub === null) {
-                            console.log('Not subscribed to push service!');
-                        } else {
-                            console.log('Subscription object: ', sub);
-                            storeSubscription(sub);
-                        }
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const searchInput = document.getElementById('gameSearch');
+                if (!searchInput) return;
+        
+                const gameLinks = Array.from(document.querySelectorAll('.game-list a'));
+        
+                searchInput.addEventListener('input', () => {
+                    const term = searchInput.value.trim().toLowerCase();
+                    gameLinks.forEach(link => {
+                        const match = link.textContent.toLowerCase().includes(term);
+                        link.style.display = match ? 'inline-block' : 'none';
                     });
-                }, function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
                 });
             });
-        }
-    </script>
+        </script>            
+
+    
+        <script>
+            // MOTD Scroll Speed Adjustment
+            const motdText = document.querySelector('.motd-text');
+            const speed = 20; // Adjust scrolling speed here
+            const textLength = motdText.offsetWidth;
+            const containerWidth = document.querySelector('.motd-container').offsetWidth;
+            const duration = (textLength + containerWidth) / speed;
+            motdText.style.animationDuration = `${30}s`;
+
+            // ServiceWorker Registration
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('sw.js').then(function(registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                        registration.pushManager.getSubscription().then(function(sub) {
+                            if (sub === null) {
+                            console.log('Not subscribed to push service!');
+                            } else {
+                                console.log('Subscription object: ', sub);
+                                storeSubscription(sub);
+                            }
+                        });
+                        }, function(err) {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+                });
+            }
+        </script>
 
  <!-- <script>
     
-    const allowedHosts = ["catman6112.github.io", "cat-nitro.github.io"];
+    const allowedHosts = ["catman6112.github.io", "cat-nitro.github.io", "nitro.crownprincehospital.com", "nitro.nicolasai.com", "nitro.kugelfoods.com"];
     const currentHost = window.location.hostname;
 
     console.log("Current Host:", currentHost);
@@ -690,8 +759,6 @@
     }
 </script> -->
 
-
-    <
     <div id="videoContainer" class="alert" style="display: none;">
         <video id="randomVideo" src="assets/music/mariah.mp4" width="720" height="1080" controls></video>
     </div>
