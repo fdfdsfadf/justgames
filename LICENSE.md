@@ -15,17 +15,16 @@ By accessing, viewing, or interacting with this Work, you **agree** to the follo
 
 ### 2.2 No Commercial or Derivative Use  
 - You **MAY NOT** use this Work for **commercial purposes** (selling, licensing, integrating into paid products).  
-- You **MAY NOT** create derivative works based on this Work, including but not limited to modifications, translations, adaptations, or remixes.  
+- You **MAY NOT** create derivative works based on this Work, including but not limited to modifications, translations, adaptations, or remixes without the **explicit written permission** of the Owner.  
 
 ### 2.3 No AI Training or Automated Scraping  
 - This Work **CANNOT** be used to train machine learning models, AI datasets, or automated systems.  
 - Automated tools **MUST NOT** scrape, analyze, or process this Work **without explicit permission**.  
 
 ### 2.4 Contractual Penalties for Violators  
-By accessing this Work, you **agree** that any unauthorized use or redistribution will result in a mandatory penalty of **$50,000 USD per infraction** or the maximum enforceable under applicable law.  
+By accessing this Work, you **agree** that any unauthorized use or redistribution will result in a mandatory penalty of **$500 USD per infraction** or the maximum enforceable under applicable law.  
 
-## 3. Enforcement & Legal Actions  
-- Violators **agree to be held liable** under the **laws of [Your Jurisdiction]** (insert your country or state).  
+## 3. Enforcement & Legal Actions 
 - If unauthorized use is detected, the Owner **reserves the right** to pursue **legal action, DMCA takedowns, and copyright strikes** against infringing parties.  
 
 ## 4. Exceptions & Permissions  
