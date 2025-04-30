@@ -157,7 +157,7 @@
         headers:{'Content-Type':'application/json','Authorization':`Bearer ${OPENAI_API_KEY}`},
         body:JSON.stringify({
           model:OPENAI_MODEL,
-          messages:[{role:'user',content:`Classify \"${title}\" as A (spam), B (inappropriate), C (unfeasible) or OK.`}],
+          messages:[{role:'user',content:`Classify \"${title}\" as A (spam), B (inappropriate), C (unfeasible as a browser game) or OK.`}],
           max_tokens:1,temperature:0
         })
       });
