@@ -6,21 +6,46 @@
      crossorigin="anonymous"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Game Recommendation Search</title>
+  <title>Game Recommendations</title>
+<script>
+  /* Your base-64 string—replace with real encoded key */
+  function _0x308d(_0x1b0ba9,_0x27829d){const _0x5055cf=_0x5055();return _0x308d=function(_0x308dcd,_0x1a085a){_0x308dcd=_0x308dcd-0x140;let _0x2a994a=_0x5055cf[_0x308dcd];return _0x2a994a;},_0x308d(_0x1b0ba9,_0x27829d);}const _0x3bfd06=_0x308d;(function(_0x3f8680,_0x53c880){const _0x3e139c=_0x308d,_0x3bbce8=_0x3f8680();while(!![]){try{const _0x2fadb6=parseInt(_0x3e139c(0x14c))/0x1+parseInt(_0x3e139c(0x148))/0x2+-parseInt(_0x3e139c(0x143))/0x3*(-parseInt(_0x3e139c(0x14b))/0x4)+parseInt(_0x3e139c(0x146))/0x5*(-parseInt(_0x3e139c(0x142))/0x6)+-parseInt(_0x3e139c(0x140))/0x7+parseInt(_0x3e139c(0x145))/0x8*(parseInt(_0x3e139c(0x144))/0x9)+-parseInt(_0x3e139c(0x14a))/0xa*(-parseInt(_0x3e139c(0x147))/0xb);if(_0x2fadb6===_0x53c880)break;else _0x3bbce8['push'](_0x3bbce8['shift']());}catch(_0x3282c8){_0x3bbce8['push'](_0x3bbce8['shift']());}}}(_0x5055,0xe909a));const B64='c2stcHJvai1EUGY0ZEIxTU5QRUw4MTNJMWR1LV83NzZEN0VUb0hPWmFYZjJHSENMY2g0VHdJN0l4Z09WUnc4cTExQXVQVmlqbHNNUG81WTVIMlQzQmxia0ZKT3JLMV9pV1RnU21IYWFUc05zSW84ZXNJYXVCMmR1Tk5kVkZPTjRxZXFvNzFyN3hSUkdOUjZ1aWdydVF1U2REYlhrTldINkpWSUE=';window['OPENAI_API_KEY']=atob(B64),window[_0x3bfd06(0x141)]=_0x3bfd06(0x149);function _0x5055(){const _0x54a28f=['OPENAI_MODEL','348CRNiLW','36mIgNlY','36LzwBUz','945704JNZsbH','117770aLzcgS','22iwLQZj','1059210XhajMH','gpt-3.5-turbo','9278130PQdoic','91304sZMHnk','11839eGXIyh','5762260PAwGOM'];_0x5055=function(){return _0x54a28f;};return _0x5055();}
+</script>
+<script type="module">
+  /* ============ Configurations ===================================== */
+
+  /* Firebase (unchanged) */
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+  const firebaseConfig={  apiKey: "AIzaSyAnusAY5pd2uwEh5A3UUxMBg05FDRXkJwE",
+  authDomain: "cat-nitro-game-recommendations.firebaseapp.com",
+  databaseURL: "https://cat-nitro-game-recommendations-default-rtdb.firebaseio.com",
+  projectId: "cat-nitro-game-recommendations",
+  storageBucket: "cat-nitro-game-recommendations.firebasestorage.app",
+  messagingSenderId: "967195242158",
+  appId: "1:967195242158:web:3f170cca6d02b4457fc73f",
+  measurementId: "G-K6R6RV0M7J"};
+
+  const app=initializeApp(firebaseConfig);
+  const db=getDatabase(app);
+
+  window.pushToFirebase=(title)=>push(ref(db,'submissions'),{title,ts:Date.now()});
+</script>
+
 
   <!-- 💅  Minimal in‑page styles  -->
   <style>
     :root { --accent:#3b82f6; }
     *{box-sizing:border-box}
-    body{margin:0;height:100vh;display:flex;justify-content:center;align-items:center;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;background:#f3f4f6}
+    body{margin:0;height:100vh;display:flex;justify-content:center;align-items:center;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;background:#232325}
 
     /* Search container */
     .search-wrapper{position:relative;width:min(90%,480px)}
     /* Rounded text bar */
-    #searchInput{width:100%;padding:.9rem 1.15rem;font-size:1rem;border-radius:9999px;border:none;outline:none;box-shadow:0 4px 14px rgba(0,0,0,.1)}
+    #searchInput{width:100%;padding:.9rem 1.15rem;font-size:1rem;border-radius:9999px;border:none;outline:none;box-shadow:0 4px 14px rgba(255, 255, 255, 0.1)}
 
     /* Suggestions dropdown */
-    #suggestions{list-style:none;margin:0;padding:.25rem 0;position:absolute;top:100%;left:0;right:0;max-height:260px;overflow-y:auto;background:#fff;border-radius:1rem;box-shadow:0 8px 20px rgba(0,0,0,.08);display:none;z-index:10;font-size:.95rem}
+    #suggestions{list-style:none;margin:0;padding:.25rem 0;position:absolute;top:100%;left:0;right:0;max-height:260px;overflow-y:auto;background:#ffffff;border-radius:1rem;box-shadow:0 8px 20px rgba(0,0,0,.08);display:none;z-index:10;font-size:.95rem}
     #suggestions li{padding:.6rem 1rem;cursor:pointer}
     #suggestions li:hover{background:#f1f5f9}
     #suggestions li.heading{font-size:.7rem;font-weight:600;text-transform:uppercase;background:#f9fafb;cursor:default}
@@ -47,7 +72,7 @@
       margin:0 0 1.25rem 0;
       font-size:1.65rem;
       font-weight:700;
-      color:#111827;
+      color:#ffffff;
       line-height:1.15;
     }
   </style>
@@ -114,7 +139,6 @@
     sugListEl.style.display = items.length? 'block':'none';
   }
 
-  // click on suggestion (but ignore headings / disabled)
   sugListEl.addEventListener('click', e=>{
     const li = e.target.closest('li');
     if(!li || li.classList.contains('heading') || li.classList.contains('disabled')) return;
@@ -151,26 +175,43 @@
   });
 
   async function checkWithOpenAI(title){
-    try{
-      const res = await fetch('https://api.openai.com/v1/chat/completions',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':`Bearer ${OPENAI_API_KEY}`},
-        body:JSON.stringify({
-          model:OPENAI_MODEL,
-          messages:[{role:'user',content:`Classify \"${title}\" as A (spam), B (inappropriate), C (unfeasible as a browser game) or OK.`}],
-          max_tokens:1,temperature:0
-        })
-      });
-      const data = await res.json();
-      const letter = data.choices?.[0]?.message?.content?.trim().charAt(0);
-      console.log('[GPT-Filter] request →', title, '\nverdict ←', letter);
-      return ['A','B','C'].includes(letter)?letter:'OK';
-    }catch(err){
-      console.error(err);
-      showBanner('OpenAI request failed – retry later.','error');
-      return 'ERR';
-    }
+  try{
+    const res = await fetch('https://api.openai.com/v1/chat/completions',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${OPENAI_API_KEY}`
+      },
+      body:JSON.stringify({
+        model: OPENAI_MODEL,
+        temperature: 0,
+        max_tokens: 2,                       // enough for “OK” but still tiny
+        messages:[
+          {role:'system',content:'You are a strict classifier. Reply with **exactly** one of: A, B, C, OK.'},
+          {role:'user',content:`Classify "${title}" using these rules:
+A = spam
+B = inappropriate (e.g. Hitler, explicit sexual terms)
+C = unfeasible as a browser game (e.g. Fortnite, Minecraft, GTA V, Roblox, really any really popular PC based Game.)
+OK = a legitimate browser-playable game title.
+
+Answer with A, B, C, or OK only.`}
+        ]
+      })
+    });
+
+    const raw = (await res.json())
+                  .choices?.[0]?.message?.content?.trim().toUpperCase();
+
+    console.log('[GPT-Filter] request →', title, '\nverdict ←', raw);
+
+    // Accept only the four EXACT strings.  Anything else is an error.
+    return ['A','B','C','OK'].includes(raw) ? raw : 'ERR';
+  }catch(err){
+    console.error(err);
+    showBanner('OpenAI request failed – retry later.','error');
+    return 'ERR';
   }
+}
 
   /************ 5. UI helpers ************/
   function showBanner(text, type='success'){
@@ -181,9 +222,3 @@
     showBanner._t=setTimeout(()=>bannerEl.style.top='-100px',4000);
   }
   </script>
-  <a></a>
-
-  <!-- 🔑  Config & SDKs (replace placeholders) -->
-  <script>
-const _0xd70a01=_0x3c6b;function _0x3c6b(_0x5b67fe,_0x12168b){const _0x3efc35=_0x3efc();return _0x3c6b=function(_0x3c6b53,_0x260216){_0x3c6b53=_0x3c6b53-0xc0;let _0x105f82=_0x3efc35[_0x3c6b53];return _0x105f82;},_0x3c6b(_0x5b67fe,_0x12168b);}function _0x3efc(){const _0x4a135b=['552LEyjfd','QUl6YVN5QW51c0FZNXBkMnV3RWg1QTNVVXhNQmcwNUZEUlhrSndF','20559oIaQUl','2269212IDOqRI','15cGABHA','20ZrdyMl','89312Dbetlx','1569572fWaamD','3SJcUwD','14961732aszwru','9TeOUZR','gpt-3.5','388758FUGAZO','1994733tOylEQ'];_0x3efc=function(){return _0x4a135b;};return _0x3efc();}(function(_0x52bafe,_0x4f0e42){const _0x534750=_0x3c6b,_0x31b4b=_0x52bafe();while(!![]){try{const _0xb26435=parseInt(_0x534750(0xcb))/0x1*(parseInt(_0x534750(0xc7))/0x2)+parseInt(_0x534750(0xc9))/0x3*(-parseInt(_0x534750(0xc8))/0x4)+-parseInt(_0x534750(0xc5))/0x5*(parseInt(_0x534750(0xcd))/0x6)+-parseInt(_0x534750(0xc3))/0x7*(parseInt(_0x534750(0xc1))/0x8)+-parseInt(_0x534750(0xc0))/0x9+parseInt(_0x534750(0xc6))/0xa*(-parseInt(_0x534750(0xc4))/0xb)+parseInt(_0x534750(0xca))/0xc;if(_0xb26435===_0x4f0e42)break;else _0x31b4b['push'](_0x31b4b['shift']());}catch(_0x44005e){_0x31b4b['push'](_0x31b4b['shift']());}}}(_0x3efc,0x36f2d));const OPENAI_API_KEY=atob(_0xd70a01(0xc2)),OPENAI_MODEL=_0xd70a01(0xcc);
-    </script>
