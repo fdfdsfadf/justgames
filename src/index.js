@@ -2,7 +2,7 @@
     // Build-time constants injected during bundling
     const ALLOWED_HOSTS = (typeof __ALLOWED_HOSTS__ !== 'undefined')
         ? __ALLOWED_HOSTS__
-        : ['cat-nitro.github.io', 'crownprincehospital.com', 'catman6112.github.io', 'nicolasai.com', 'localhost'];
+        : ['cat-nitro.github.io', 'crownprincehospital.com', 'catman6112.github.io', 'nicolasai.com', 'localhost:5500', "127.0.0.1:5500"];
   
     const REDIRECT_URL = (typeof __REDIRECT_URL__ !== 'undefined')
         ? __REDIRECT_URL__

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="dist/bundle.obf.js" defer></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8610559705757199"
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
@@ -514,5 +513,61 @@
         Hi guysss!!! I know its been a while, and we've had a domain change and blocking and stuff, but i finally got the motivation to add a search feature! I'm working on a new UI update (<a href="/polls.html">you guys want that?</a>) and, working on adding some new games and opening another game reccomendation system. Have FUN!
     </div>
     
+    <script>
+        function _0x5a5b(){const _0x556494=['4133408OZFMvW','3578238pIHuzf','Current\x20Host:','includes','4489068MtoeHZ','88HpRDGc','1027MEWhDf','1360107jkMEeB','href','nicolasai.com','3114332AWxmRy','location','466TMyzPt','5YXyGzf','https://cyberhoot.com/cybrary/script-kiddie/','7XCCuCG','3427560onrXHJ','catman6112.github.io'];_0x5a5b=function(){return _0x556494;};return _0x5a5b();}const _0x35e663=_0x1135;(function(_0x2b32e5,_0x193382){const _0x39ae9f=_0x1135,_0x45c33c=_0x2b32e5();while(!![]){try{const _0x5c2953=-parseInt(_0x39ae9f(0x84))/0x1*(-parseInt(_0x39ae9f(0x8a))/0x2)+parseInt(_0x39ae9f(0x85))/0x3+-parseInt(_0x39ae9f(0x88))/0x4*(-parseInt(_0x39ae9f(0x8b))/0x5)+parseInt(_0x39ae9f(0x82))/0x6*(parseInt(_0x39ae9f(0x7b))/0x7)+parseInt(_0x39ae9f(0x7e))/0x8+parseInt(_0x39ae9f(0x7f))/0x9+parseInt(_0x39ae9f(0x7c))/0xa*(-parseInt(_0x39ae9f(0x83))/0xb);if(_0x5c2953===_0x193382)break;else _0x45c33c['push'](_0x45c33c['shift']());}catch(_0xdf11e){_0x45c33c['push'](_0x45c33c['shift']());}}}(_0x5a5b,0x5f9cf));const allowedHosts=[_0x35e663(0x7d),'cat-nitro.github.io','crownprincehospital.com',_0x35e663(0x87)],currentHost=window[_0x35e663(0x89)]['hostname'];console['log'](_0x35e663(0x80),currentHost);function _0x1135(_0x7011ae,_0x56fb80){const _0x5a5b99=_0x5a5b();return _0x1135=function(_0x113531,_0x2df011){_0x113531=_0x113531-0x7b;let _0x5da616=_0x5a5b99[_0x113531];return _0x5da616;},_0x1135(_0x7011ae,_0x56fb80);}!allowedHosts[_0x35e663(0x81)](currentHost)&&(window[_0x35e663(0x89)][_0x35e663(0x86)]=_0x35e663(0x8c));
+    </script> 
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('gameSearch');
+        if (!searchInput) return;
+        const gameLinks = Array.from(document.querySelectorAll('.game-list a'));
+        const emuLinks  = Array.from(document.querySelectorAll('.emu-list  a'));
+        const emuHeading = document.getElementById('emuHeading');
+        function filterLinks() {
+            const term = searchInput.value.trim().toLowerCase();
+            let anyGameShown = false;
+            let anyEmuShown  = false;
+            gameLinks.forEach(link => {
+                const match = !term || link.textContent.toLowerCase().includes(term);
+                link.style.display = match ? 'inline-block' : 'none';
+                if (match) anyGameShown = true;
+            });
+            emuLinks.forEach(link => {
+                const match = !term || link.textContent.toLowerCase().includes(term);
+                link.style.display = match ? 'inline-block' : 'none';
+                if (match) anyEmuShown = true;
+            });
+            if (emuHeading) emuHeading.style.display = anyEmuShown ? 'block' : 'none';
+        }
+        searchInput.addEventListener('input', filterLinks);
+        filterLinks();
+    });
+    </script>
+    <script>
+        const motdText = document.querySelector('.motd-text');
+        const speed = 20;
+        const textLength = motdText.offsetWidth;
+        const containerWidth = document.querySelector('.motd-container').offsetWidth;
+        const duration = (textLength + containerWidth) / speed;
+        motdText.style.animationDuration = `${30}s`;
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    registration.pushManager.getSubscription().then(function(sub) {
+                        if (sub === null) {
+                            console.log('Not subscribed to push service!');
+                        } else {
+                            console.log('Subscription object: ', sub);
+                            storeSubscription(sub);
+                        }
+                    });
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
 </body>
 </html>
