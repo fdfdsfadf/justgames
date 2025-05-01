@@ -1,2 +1,93 @@
-// good luck dumbass
-const _0x338d70=_0x41f4;function _0x41f4(_0x133cfb,_0x19e50d){const _0x5f1d5f=_0x5f1d();return _0x41f4=function(_0x41f41a,_0x17bb0f){_0x41f41a=_0x41f41a-0x107;let _0x2c468b=_0x5f1d5f[_0x41f41a];return _0x2c468b;},_0x41f4(_0x133cfb,_0x19e50d);}(function(_0xa7afdd,_0x2122fb){const _0x285c75=_0x41f4,_0x15b269=_0xa7afdd();while(!![]){try{const _0x53f155=-parseInt(_0x285c75(0x126))/0x1*(-parseInt(_0x285c75(0x111))/0x2)+-parseInt(_0x285c75(0x13f))/0x3*(-parseInt(_0x285c75(0x109))/0x4)+-parseInt(_0x285c75(0x121))/0x5+parseInt(_0x285c75(0x131))/0x6*(parseInt(_0x285c75(0x136))/0x7)+-parseInt(_0x285c75(0x10c))/0x8+-parseInt(_0x285c75(0x112))/0x9+-parseInt(_0x285c75(0x12a))/0xa;if(_0x53f155===_0x2122fb)break;else _0x15b269['push'](_0x15b269['shift']());}catch(_0x48a149){_0x15b269['push'](_0x15b269['shift']());}}}(_0x5f1d,0x1f3c5),((()=>{const _0x7e0204=_0x41f4,_0x3bf67e=typeof __ALLOWED_HOSTS__!==_0x7e0204(0x12f)?__ALLOWED_HOSTS__:['cat-nitro.github.io','crownprincehospital.com','catman6112.github.io',_0x7e0204(0x11e),_0x7e0204(0x113)],_0x2b9641=typeof __REDIRECT_URL__!==_0x7e0204(0x12f)?__REDIRECT_URL__:_0x7e0204(0x116),_0x3dfe1b=_0x3bf67e['map'](_0x18251d=>_0x18251d[_0x7e0204(0x123)]('')[_0x7e0204(0x117)](_0x2eb020=>_0x2eb020[_0x7e0204(0x137)](0x0))[_0x7e0204(0x117)](_0x3c661d=>_0x3c661d['toString'](0x24))[_0x7e0204(0x119)]('-'))['map'](_0x2793a3=>_0x2793a3[_0x7e0204(0x123)]('-')[_0x7e0204(0x117)](_0x109cc1=>String[_0x7e0204(0x13e)](parseInt(_0x109cc1,0x24)))[_0x7e0204(0x119)](''));!_0x3dfe1b['includes'](location['hostname'])&&location[_0x7e0204(0x13a)](_0x2b9641);})()),document[_0x338d70(0x13b)](_0x338d70(0x107),()=>{const _0x268536=_0x338d70,_0x8dd809=document[_0x268536(0x128)](_0x268536(0x12e));if(!_0x8dd809)return;const _0x174e08=Array[_0x268536(0x11c)](document[_0x268536(0x12c)]('.game-list\x20a')),_0x6b7a44=Array[_0x268536(0x11c)](document[_0x268536(0x12c)](_0x268536(0x135))),_0x42ef97=document[_0x268536(0x128)]('emuHeading'),_0x30fe59=()=>{const _0x24edce=_0x268536,_0x12eb6f=_0x8dd809[_0x24edce(0x129)]['trim']()[_0x24edce(0x140)]();let _0x309018=![],_0x151464=![];const _0x5f50e7=_0x16c8db=>{const _0x11eba7=_0x24edce,_0x58258b=!_0x12eb6f||_0x16c8db[_0x11eba7(0x125)]['toLowerCase']()[_0x11eba7(0x108)](_0x12eb6f);return _0x16c8db[_0x11eba7(0x133)]['display']=_0x58258b?_0x11eba7(0x10f):_0x11eba7(0x134),_0x58258b;};_0x174e08[_0x24edce(0x10d)](_0x144964=>{if(_0x5f50e7(_0x144964))_0x309018=!![];}),_0x6b7a44[_0x24edce(0x10d)](_0x3b7290=>{if(_0x5f50e7(_0x3b7290))_0x151464=!![];});if(_0x42ef97)_0x42ef97['style'][_0x24edce(0x10b)]=_0x151464?'block':_0x24edce(0x134);};_0x8dd809[_0x268536(0x13b)]('input',_0x30fe59),_0x30fe59();}),window[_0x338d70(0x13b)](_0x338d70(0x130),()=>{const _0xa01ae7=_0x338d70,_0x530866=document[_0xa01ae7(0x11b)](_0xa01ae7(0x114)),_0x4c8b76=document[_0xa01ae7(0x11b)](_0xa01ae7(0x124));if(_0x530866&&_0x4c8b76){const _0x22b847=0x14,_0x4cec20=(_0x530866[_0xa01ae7(0x132)]+_0x4c8b76[_0xa01ae7(0x132)])/_0x22b847;_0x530866['style']['animationDuration']=_0x4cec20+'s';}_0xa01ae7(0x122)in navigator&&navigator[_0xa01ae7(0x122)][_0xa01ae7(0x115)](_0xa01ae7(0x139))[_0xa01ae7(0x11f)](_0x251863=>console[_0xa01ae7(0x12d)](_0xa01ae7(0x138),_0x251863[_0xa01ae7(0x120)]))['catch'](_0x40b998=>console['warn'](_0xa01ae7(0x11d),_0x40b998));}),((()=>{const _0x129f83=_0x338d70,_0x596c9a=typeof __BUILD_HASH__!==_0x129f83(0x12f)?__BUILD_HASH__:null;if(!_0x596c9a)return;const _0x5138a8=async _0x4b624d=>{const _0x8384e5=_0x129f83,_0x537d96=new TextEncoder()[_0x8384e5(0x10a)](_0x4b624d),_0x46e136=await crypto[_0x8384e5(0x110)]['digest'](_0x8384e5(0x10e),_0x537d96);return Array['from'](new Uint8Array(_0x46e136))[_0x8384e5(0x117)](_0x481e40=>_0x481e40[_0x8384e5(0x13c)](0x10)[_0x8384e5(0x127)](0x2,'0'))['join']('');};((async()=>{const _0x50eb80=_0x129f83,_0x58b591=document[_0x50eb80(0x12b)];if(!_0x58b591||!_0x596c9a)return;const _0x59d287=await _0x5138a8(_0x58b591[_0x50eb80(0x125)]);_0x59d287!==_0x596c9a&&(console[_0x50eb80(0x13d)](_0x50eb80(0x11a)),location[_0x50eb80(0x13a)](_0x50eb80(0x118)));})());})()));function _0x5f1d(){const _0x23f3c6=['addEventListener','toString','warn','fromCharCode','6eoLXHb','toLowerCase','DOMContentLoaded','includes','508324IjZBkN','encode','display','1184680BeKvOi','forEach','SHA-256','inline-block','subtle','10HgluCM','118053inCiBy','localhost','.motd-text','register','https://cyberhoot.com/cybrary/script-kiddie/','map','about:blank','join','Bundle\x20tampered\x20with!','querySelector','from','SW\x20failed','nicolasai.com','then','scope','440960hGwMyo','serviceWorker','split','.motd-container','textContent','24169LNaPDm','padStart','getElementById','value','2454770PFqmKN','currentScript','querySelectorAll','info','gameSearch','undefined','load','30jaXphg','offsetWidth','style','none','.emu-list\x20\x20a','346927BTHaLo','charCodeAt','SW\x20ok','sw.js','replace'];_0x5f1d=function(){return _0x23f3c6;};return _0x5f1d();}
+(() => {
+    // Build-time constants injected during bundling
+    const ALLOWED_HOSTS = (typeof __ALLOWED_HOSTS__ !== 'undefined')
+        ? __ALLOWED_HOSTS__
+        : ['cat-nitro.github.io', 'crownprincehospital.com', 'catman6112.github.io', 'nicolasai.com', 'localhost'];
+  
+    const REDIRECT_URL = (typeof __REDIRECT_URL__ !== 'undefined')
+        ? __REDIRECT_URL__
+        : 'https://cyberhoot.com/cybrary/script-kiddie/';
+  
+    // Compute strings at runtime to frustrate grep
+    const ok = ALLOWED_HOSTS.map(h =>
+        h.split('').map(c => c.charCodeAt(0)).map(n => n.toString(36)).join('-')
+    ).map(encoded =>
+        encoded.split('-').map(n => String.fromCharCode(parseInt(n, 36))).join('')
+    );
+  
+    if (!ok.includes(location.hostname)) {
+      location.replace(REDIRECT_URL);
+    }
+  })();
+  
+  /* ========= 1. DOMContentLoaded – search filter ========= */
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('gameSearch');
+    if (!searchInput) return;
+  
+    const gameLinks = Array.from(document.querySelectorAll('.game-list a'));
+    const emuLinks  = Array.from(document.querySelectorAll('.emu-list  a'));
+    const emuHeading = document.getElementById('emuHeading');
+  
+    const filterLinks = () => {
+      const term = searchInput.value.trim().toLowerCase();
+      let anyGameShown = false;
+      let anyEmuShown  = false;
+  
+      const toggle = (link) => {
+        const match = !term || link.textContent.toLowerCase().includes(term);
+        link.style.display = match ? 'inline-block' : 'none';
+        return match;
+      };
+  
+      gameLinks.forEach(l => { if (toggle(l)) anyGameShown = true; });
+      emuLinks.forEach(l  => { if (toggle(l)) anyEmuShown  = true; });
+  
+      if (emuHeading) emuHeading.style.display = anyEmuShown ? 'block' : 'none';
+    };
+  
+    searchInput.addEventListener('input', filterLinks);
+    filterLinks();
+  });
+  
+  /* ========= 2. MOTD marquee & service‑worker ========= */
+  window.addEventListener('load', () => {
+    const motdText = document.querySelector('.motd-text');
+    const container = document.querySelector('.motd-container');
+    if (motdText && container) {
+      const speed = 20; // px per second
+      const duration = (motdText.offsetWidth + container.offsetWidth) / speed;
+      motdText.style.animationDuration = `${duration}s`;
+    }
+  
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(r => console.info('SW ok', r.scope))
+        .catch(err => console.warn('SW failed', err));
+    }
+  });
+  
+  /* ========= 3. Optional integrity self‑check ========= 
+  (() => {
+    // BUILD_HASH will be replaced by the bundler
+    const EXPECTED = (typeof __BUILD_HASH__ !== 'undefined') ? __BUILD_HASH__ : null;
+    if (!EXPECTED) return; // skip in dev
+  
+    // quick SHA‑256 via SubtleCrypto
+    const hashText = async (txt) => {
+      const buf = new TextEncoder().encode(txt);
+      const hash = await crypto.subtle.digest('SHA-256', buf);
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+    };
+  
+    (async () => {
+      const scriptTag = document.currentScript;
+      if (!scriptTag || !EXPECTED) return;
+      const actual = await hashText(scriptTag.textContent);
+      if (actual !== EXPECTED) {
+        console.warn('Bundle tampered with!');
+        location.replace('about:blank'); // cheap fail‑closed
+      }
+    })();
+  })(); */
+  
