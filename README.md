@@ -1,18 +1,22 @@
-
-
 # Cat-Nitro
 
-## WE ARE SO BACK
+## The Site Fuffilling Every Student's Gaming Needs.
 
-OG Cat-Nitro, or Pepsi Nitro was originally created by Dr Doomsday.
+### Build From **PEPSI NITRO**, CREATED BY **DR DOOMSDAY** (rip his github account)
 
-He created pepsi nitro, then **moved** the repository, in which he stoped updating it. 
+Cat-Nitro was developed by me, a fellow student fed up by their school's harsh filter. "If they dont care enough to block it, we're allowed to use it." is a personal motto of mine. 
 
-I stepped in, rebranded it, and now commit (usually) weekly updates or quick bug fixes. Mr. Doomsday, was essentially banned off of github for having offensive pronouns.
+I Originally created this as a passion project after the original pepsi nitro had it's repository moved and advertised it to other students. It soon spread like wild fire amoungst my peers, causing me to get motivation, making a new feature, people like it, repeat.
 
-This purged Pepsi Nitro, Leaving this website one of the only forks that remained standing. Most design and color pallet choice credit goes to him. However i have been addig more games and archives. 
+The Cat-Nitro team has begun work on another site, *Project: Freebird*. This is a proxy site based off the Ultraviolet system.
+
+However, my school, and others', have begun blocking domains, causing me to purchase old expired ones, and repeat this process. This costs me losts of monies. So, support is appreciated. 
+
+We dont have a support method right now, but you can help by spreading word of this website.
 
 ## 🔗 Links
 [My Github Account](https://github.com/catman6112)
+
+[Project: Freebird](https://rizz.crownprincehospital.com)
 
 [Cat-Nitro](nitro.crownprincehospital.com)

@@ -1,7 +1,7 @@
 # Cat Anti-Theft License (CATL) v1.0
 
 **Last Updated: February 9, 2025**  
-**Owner: CatMan6112 (a.k.a. Cat-Nitro)**  
+**Owner: CatMan6112**  
 
 ## 1. License Scope  
 This website, including all its **code, design, content, media, and any related assets** (hereafter referred to as "the Work"), is made available under the **Cat Anti-Theft License (CATL)**.  
