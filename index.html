@@ -107,15 +107,34 @@
         }
         .search-bar::placeholder { color: #4400ff; }
 
+        /* ‑‑‑ Recently‑played list adopts the same card style as games ‑‑‑ */
+.recent-list a{
+    width:22%;
+    padding:4px 0;
+    border-radius:15px;
+    border-width:1px;
+    margin:4px 0;
+    display:inline-block;
+    position:relative;
+    transition:transform var(--hover-duration) ease,
+               box-shadow var(--hover-duration) ease;
+    will-change:transform;
+}
+.recent-list a:hover{
+    transform:scale(var(--hover-scale));
+    z-index:10;
+    box-shadow:0 0 12px 4px #1eff00;
+}
+
     </style>
 </head>
 <body>
     <div id="videoContainer" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-        <video id="randomVideo" src="assets/music/mariah.mp4" width="640" height="360" controls></video>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/ctYNBd6t4-g?si=OynAM4zGf6gmVPO9&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
     <div class="motd-container"><div class="motd-text"> You should play n-gon. Very sigma.</div></div>
     <center>
-        <img src="assets/img/filtered-logo-512.png" class="front" alt="Cat‑Nitro logo" style="width:125px;height:125px;margin-top:20px;">
+        <img src="assets/img/logo_712.png" class="front" alt="Cat‑Nitro logo" style="width:125px;height:125px;margin-top:20px;">
         <h1 class="flick"><b>Cat‑Nitro Games</b></h1>
     </center>
     <hr style="height:2px;border-width:0;color:white;background-color:blue">
@@ -123,6 +142,17 @@
         <input type="text" id="gameSearch" class="search-bar" placeholder="Search games or emulators… (e.g., retro bowl)">
     </center></div>
     <hr style="height:2px;border-width:0;color:white;background-color:blue">
+    <!-- …existing <hr> that follows the search bar … -->
+
+<!-- NEW —‑ recently‑played header & container -->
+<font color="blue">
+  <h1 id="recentHeading" style="display:none;"><center>Recently Played</center></h1>
+</font>
+<center class="recent-list" style="display:none;"></center>
+
+<!-- keep the old game list separator so your layout stays identical -->
+<hr style="height:2px;border-width:0;color:white;background-color:blue">
+
     <center class="game-list">
         <a href="games/1v1lol/index.html">
             <b><p class="link">1v1lol</p></b>
@@ -511,7 +541,7 @@
         <br>
         <br>
         <center>
-        <a href="https://www.youtube.com/watch?v=fKWGtTeL3_U">I... am Steve.</a>
+        <!-- <a href="https://www.youtube.com/watch?v=fKWGtTeL3_U">I... am Steve.</a> -->
         </center>
           
     </center>
@@ -580,5 +610,53 @@
             });
         }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const RECENT_KEY = 'recentlyPlayed';
+          const MAX_ITEMS  = 10;
+        
+          const recentWrap   = document.querySelector('.recent-list');
+          const recentHeader = document.getElementById('recentHeading');
+          const gameLinks    = Array.from(document.querySelectorAll('.game-list a'));
+        
+          /* ---------- helpers ---------- */
+          const loadRecent = () => JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+        
+          const saveRecent = list => localStorage.setItem(RECENT_KEY, JSON.stringify(list));
+        
+          const renderRecent = () => {
+              const items = loadRecent();
+              recentWrap.innerHTML = '';
+              if (!items.length){          // hide section when empty
+                  recentWrap.style.display   = 'none';
+                  recentHeader.style.display = 'none';
+                  return;
+              }
+              recentWrap.style.display   = 'block';
+              recentHeader.style.display = 'block';
+        
+              items.forEach(({href,text}) => {
+                  const a   = document.createElement('a');
+                  a.href    = href;
+                  a.innerHTML = `<b><p class="link">${text}</p></b>`;
+                  recentWrap.appendChild(a);
+              });
+          };
+        
+          const addToRecent = link => {
+              let list = loadRecent();
+              const idx = list.findIndex(i => i.href === link.href);
+              if (idx !== -1) list.splice(idx,1);        // de‑duplicate
+              list.unshift({href: link.href, text: link.textContent.trim()});
+              if (list.length > MAX_ITEMS) list = list.slice(0, MAX_ITEMS);
+              saveRecent(list);
+          };
+        
+          /* ---------- wire it up ---------- */
+          gameLinks.forEach(link => link.addEventListener('click', () => addToRecent(link)));
+          renderRecent();
+        });
+        </script>
+        
 </body>
 </html>
