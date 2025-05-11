@@ -99,8 +99,10 @@
   <script>
   /************ 0. Config ************/
   const MAX_CHARS      = 50;
-  const COOLDOWN_MS    = 60 * 60 * 1000;   // 1 hour
+  const COOLDOWN_MS    = 60;   // 1 hour
   const LS_KEY_LASTSUB = 'cn_lastSubmit';
+  /* NEW – protects against double‑submits --------------------------- */
+  let isSubmitting = false;
 
   /************ 1. Data ************/
   const ALL_GAMES = [
@@ -194,12 +196,18 @@
   });
 
   /************ 6. Form submission ************/
-  formEl.addEventListener('submit', async e=>{
-    e.preventDefault();
-    if(inputEl.disabled) return;  // in cooldown
+  formEl.addEventListener('submit', async e => {
+  e.preventDefault();
 
+  /* block if (a) still cooling‑down  OR  (b) you already hit Enter once */
+  if (inputEl.disabled || isSubmitting) return;
+
+  isSubmitting   = true;   // 🔒 stop further Enters instantly
+  inputEl.disabled = true; // optional – but gives clear visual feedback
+
+  try {
     const title = inputEl.value.trim();
-    if(!title) return;
+    if (!title) return;
 
     // 6.1 Already included?
     if(BLACKLIST.some(g=>g.toLowerCase()===title.toLowerCase())){
@@ -221,7 +229,7 @@
       const msgMap={A:'was flagged as spam.',B:'was deemed inappropriate.',C:"isn\'t feasible as a browser game."};
       showBanner('"'+title+'" '+msgMap[verdict]+' <a href="https://forms.gle/rLt9Vm1n9632ze2dA" target="_blank">Learn more</a>', verdict==='A'?'warn':'error');
     }
-  });
+  })
 
   /************ 7. OpenAI helper (patched) ************/
   async function checkWithOpenAI(title){
@@ -262,6 +270,7 @@ Answer with A, B, C, or OK only.`}
     return 'ERR';
   }
 }
+
 
   /************ 8. UI helpers ************/
   function showBanner(text, type='success'){
