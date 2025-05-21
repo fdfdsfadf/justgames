@@ -1,7 +1,7 @@
 # Cat Anti-Theft License (CATL) v1.0
 
 **Last Updated: February 9, 2025**  
-**Owner: CatMan6112**  
+**Owner: hu_gaming on discord**  
 
 ## 1. License Scope  
 This website, including all its **code, design, content, media, and any related assets** (hereafter referred to as "the Work"), is made available under the **Cat Anti-Theft License (CATL)**.  
@@ -28,7 +28,7 @@ By accessing this Work, you **agree** that any unauthorized use or redistributio
 - If unauthorized use is detected, the Owner **reserves the right** to pursue **legal action, DMCA takedowns, and copyright strikes** against infringing parties.  
 
 ## 4. Exceptions & Permissions  
-- If you wish to use this Work for **any purpose beyond personal viewing**, you **must obtain explicit written permission** from the Owner (GitHub: [CatMan6112](https://github.com/CatMan6112)).  
+- If you wish to use this Work for **any purpose beyond personal viewing**, you **must obtain explicit written permission** from the Owner (GitHub: [fdfdsfadf](https://github.com/CatMan6112)).  
 - Special licensing **may** be granted on a case-by-case basis.  
 
 
