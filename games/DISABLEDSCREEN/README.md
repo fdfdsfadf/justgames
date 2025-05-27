@@ -1,4 +1,4 @@
-# CAT NITRO IS DISABLED until exams are over
+# CAT NITRO IS DISABLED 1 week before exams until exams are over
 
 It has been decided to make the unlitmate decision to disable cat nitro for the week before exams have start.
 
