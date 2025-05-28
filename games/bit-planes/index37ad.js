@@ -4793,7 +4793,7 @@
                                             (w = window.setTimeout(() => {
                                                 let M = a.members.filter((M) => M.hasPlane()).length,
                                                     j = S.members.filter((M) => M.hasPlane()).length;
-                                                (0 != M && 0 != j) || (0 != M && 0 == j && alert("You won! 🎉"), 0 == M && 0 != j && alert("You lose."), 0 == M && 0 == j && alert("¯\\_(ツ)_/¯"), (location.href = "?mode=swarm"));
+                                                (0 != M && 0 != j) || (0 != M && 0 == j && alert("You won! 🎉"), 0 == M && 0 != j && alert("You lose. My grandma plays better (message from devs)"), 0 == M && 0 == j && alert("¯\\_(ツ)_/¯"), (location.href = "?mode=swarm"));
                                             }, 5 * u.n));
                                     };
                                     for (let t = 1; t < j; t++) {
