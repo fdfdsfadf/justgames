@@ -1,2 +1,2 @@
 google.com, pub-8167917296547686, DIRECT, f08c47fec0942fa0
-Redirect 301 /ads.txt https://srv.adstxtmanager.com/19390/[YOUR_DOMAIN].com
+Redirect 301 /ads.txt https://srv.adstxtmanager.com/19390/[macbooksuck.xyz].xyz
