@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escape Road 2</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Play Escape Road 2</h1>
-    <div class="game_area_frame">
-        <iframe 
-            loading="lazy" 
-            id="game-area" 
-            src="https://azgames.io/escape-road-2.embed"
-            width="800" 
-            height="600" 
-            scrolling="none" 
-            frameborder="0" 
-            allowfullscreen>
-        </iframe>
-    </div>
+    <iframe src="https://azgames.io/escape-road-2.embed" allowfullscreen></iframe>
 </body>
 </html>
