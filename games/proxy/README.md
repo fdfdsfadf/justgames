@@ -8,4 +8,4 @@ If you want to use it the best way is to first going the discord server as it wi
 # Proxy access priority
 It is currently only able to be accessed by the dev team as we are still fixing some common bugs. Then it will be given to those in the discord server who have been personally selected to try it out. Then it will given to all discord member users in the server. After a few weeks access will be given to ordinary users for a short period of time before it goes back to discord members only.
 
-https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/Interstellar.jpg
+(https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/Interstellar.jpg)
