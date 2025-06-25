@@ -1,4 +1,4 @@
-Welcome to the macbooksuck proxy. If you have been given early access perms continue to the link https://macbooksuper.xyz bear in mind that you must have the username and password to access it. 
+Based on the ultraviolet system Interstellar is the proxy being developed by the macbooksuck development team. If you have been given early access perms continue to the link https://macbooksuper.xyz bear in mind that you must have the username and password to access it. 
 
 To those who were intrested to find out just what this was it is a proxy that is in creation allowing you to play url games unrestricted. The proxy includes apps like amazon luna, geforce now and chatgpt allowing you to play games like fortnite right off the proxy. The proxy will be made publicly availible in the coming weeks.
 
