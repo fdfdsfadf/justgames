@@ -11,4 +11,4 @@ It is currently only able to be accessed by the dev team as we are still fixing 
 # IT IS ON [macbooksuper](https:macbooksuper.xyz)
 
 Preview image (it doesn't work if you click on it I swear I see so many braindeads clicking on it thinking that it will somehow work when it clearly says to go to the website 🤦 anyways it will now link you to it when you click on the image.)
-[![Interstellar preview :eyes: ](https://macbooksuper.xyz)](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/Interstellar.jpg)
+[![Interstellar preview :eyes: ]([https://macbooksuper.xyz](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/Interstellar.jpg))](https://macbooksuper.xyz)
