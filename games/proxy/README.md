@@ -1,4 +1,4 @@
-Based on the ultraviolet system Interstellar is the proxy being developed by the macbooksuck development team. If you have been given early access perms continue to the link [macbooksuper](https://macbooksuper) bear in mind that you must have the username and password to access it. 
+Based on the ultraviolet system, Interstellar is a proxy developed by the macbooksuck development team.
 
 To those who were intrested to find out just what this was it is a proxy that is in creation allowing you to play url games unrestricted. The proxy includes apps like amazon luna, geforce now and chatgpt allowing you to play games like fortnite right off the proxy. The proxy will be made publicly availible in the coming weeks.
 
@@ -6,10 +6,11 @@ To those who were intrested to find out just what this was it is a proxy that is
 If you want to use it the best way is to first going the discord server as it will be given only to those inside of it permanently. *discord.gg/jJ5E8ZzQGB*
 
 # Proxy access priority
-It is currently only able to be accessed by the dev team as we are still fixing some common bugs. Then it will be given to those in the discord server who have been personally selected to try it out. Then it will given to all discord member users in the server. After a few weeks access will be given to ordinary users for a short period of time before it goes back to discord members only.
+22/7/2025 is the release date of interstellar
 
-# IT IS ON [macbooksuper](https:macbooksuper.xyz)
+# IT IS ON [proxy](https://reimagined-giggle-r4r79r6v4wgr2pwj9-8080.app.github.dev/) THE LINK WILL CHANGE LIKE EVERY 5 DAYS!!!
 
 Preview image (it doesn't work if you click on it I swear I see so many braindeads clicking on it thinking that it will somehow work when it clearly says to go to the website 🤦 anyways it will now link you to it when you click on the image.)
 
-[![My cool image](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/Interstellar.jpg)](https://macbooksuck.xyz)
+[![My cool image](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/Interstellar.jpg)](https://reimagined-giggle-r4r79r6v4wgr2pwj9-8080.app.github.dev)
+
