@@ -12,5 +12,7 @@ If you want to use it the best way is to first going the discord server as it wi
 
 Preview image (it doesn't work if you click on it I swear I see so many braindeads clicking on it thinking that it will somehow work when it clearly says to go to the website 🤦 anyways it will now link you to it when you click on the image.)
 
+From Dev team (╯°□°)╯╰(°□°╰)
+
 [![My cool image](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/Interstellar.jpg)](https://reimagined-giggle-r4r79r6v4wgr2pwj9-8080.app.github.dev)
 
