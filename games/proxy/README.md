@@ -8,6 +8,9 @@ If you want to use it the best way is to first going the discord server as it wi
 # Proxy access
 22/7/2025 is the release date of interstellar it is currently under username and password but will be accessable to everyone for a week.
 
+LINK TO 2 CORE
+LINK TO 4 CORE
+
 # IT IS ON [proxy](https://reimagined-giggle-r4r79r6v4wgr2pwj9-8080.app.github.dev/) THE LINK WILL CHANGE LIKE EVERY 5 DAYS!!!
 
 Preview image (it doesn't work if you click on it I swear I see so many braindeads clicking on it thinking that it will somehow work when it clearly says to go to the website 🤦 anyways it will now link you to it when you click on the image.)
