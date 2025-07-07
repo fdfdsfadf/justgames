@@ -9,6 +9,7 @@ If you want to use it the best way is to first going the discord server as it wi
 22/7/2025 is the release date of interstellar it is currently under username and password but will be accessable to everyone for a week.
 
 LINK TO 2 CORE
+
 LINK TO 4 CORE
 
 # IT IS ON [proxy](https://reimagined-giggle-r4r79r6v4wgr2pwj9-8080.app.github.dev/) THE LINK WILL CHANGE LIKE EVERY 5 DAYS!!!
