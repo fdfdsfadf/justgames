@@ -12,7 +12,7 @@ LINK TO 2 CORE
 
 LINK TO 4 CORE
 
-[![anada](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/stats.jpg)]
+![anada](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/stats.jpg)
 
 # IT IS ON [proxy](https://reimagined-giggle-r4r79r6v4wgr2pwj9-8080.app.github.dev/) THE LINK WILL CHANGE LIKE EVERY 5 DAYS!!!
 
