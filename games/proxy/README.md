@@ -14,11 +14,11 @@ LINK TO 4 CORE (Special request only) https://didactic-system-7vp579jwjw6wfwrq4-
 
 ![anada](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/stats.jpg)
 
-# IT IS ON [proxy](https://reimagined-giggle-r4r79r6v4wgr2pwj9-8080.app.github.dev/) THE LINK WILL CHANGE LIKE EVERY 5 DAYS!!!
+# THE LINK WILL CHANGE LIKE EVERY 5 DAYS!!!
 
 Preview image (it doesn't work if you click on it I swear I see so many braindeads clicking on it thinking that it will somehow work when it clearly says to go to the website 🤦 anyways it will now link you to it when you click on the image.)
 
 From Dev team (╯°□°)╯╰(°□°╰)
 
-[![My cool image](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/Interstellar.jpg)](https://reimagined-giggle-r4r79r6v4wgr2pwj9-8080.app.github.dev)
+[![My cool image](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/Interstellar.jpg)]([https://reimagined-giggle-r4r79r6v4wgr2pwj9-8080.app.github.dev](https://didactic-system-7vp579jwjw6wfwrq4-8080.app.github.dev))
 
