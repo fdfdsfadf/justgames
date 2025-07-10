@@ -8,9 +8,9 @@ If you want to use it the best way is to first going the discord server as it wi
 # Proxy access
 22/7/2025 is the release date of interstellar it is currently under username and password but will be accessable to everyone for a week.
 
-LINK TO 2 CORE
+LINK TO 2 CORE https://super-duper-funicular-wrg5v7qxq55ph75p-8080.app.github.dev
 
-LINK TO 4 CORE
+LINK TO 4 CORE (Special request only) https://didactic-system-7vp579jwjw6wfwrq4-8080.app.github.dev
 
 ![anada](https://raw.githubusercontent.com/fdfdsfadf/Cat-nitro-with-chat-room/refs/heads/website/games/proxy/stats.jpg)
 
