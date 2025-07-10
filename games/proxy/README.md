@@ -6,7 +6,7 @@ To those who were intrested to find out just what this was it is a proxy that is
 If you want to use it the best way is to first going the discord server as it will be given only to those inside of it permanently. *discord.gg/jJ5E8ZzQGB*
 
 # Proxy access
-22/7/2025 is the release date of interstellar it is currently under username and password but will be accessable to everyone for a week.
+The release date of interstellar it is 22/7/2025
 
 LINK TO 2 CORE https://super-duper-funicular-wrg5v7qxq55ph75p-8080.app.github.dev
 
