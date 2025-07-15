@@ -48,7 +48,37 @@
 .icon-bar a:hover {
   color: #ffcc00;
 }
+        
+.icon-bar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
 
+.icon-bar i,
+.icon-bar img.nav-icon {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+.icon-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  background-color: #222;
+  z-index: 9999;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+
+        
         :root {
             --theme: #000000;
             --hover-scale: 1.2;
