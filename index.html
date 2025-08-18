@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8167917296547686"
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDD8GECEW2"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8167917296547686"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDD8GECEW2" crossorigin="anonymous"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-ZDD8GECEW2');
   </script>
-     crossorigin="anonymous"></script>
     <meta name="monetag" content="0a166606e3d4b5dd7f9f5441f0277da7">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -36,7 +34,7 @@
   justify-content: center;
   gap: 20px;
   padding: 10px;
-  background-color: #222;
+  background-color: transparent;
 }
 
 .icon-bar a {
@@ -72,12 +70,16 @@
   justify-content: center;
   gap: 20px;
   padding: 10px;
-  background-color: #222;
+  background-color: transparent;
   z-index: 9999;
   box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
-
+.icon-bar a.active i {
+  color: #1eff00;
+  text-shadow: 0 0 5px #1eff00, 0 0 10px #1eff00;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
         
         :root {
             --theme: #000000;
@@ -184,19 +186,142 @@
     box-shadow:0 0 12px 4px #1eff00;
 }
 
+#idleCountdown {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(25, 25, 25, 0.9);
+  color: #1eff00;
+  font-size: 20px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-family: 'Courier New', monospace;
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 0 10px #1eff00, 0 0 20px #1eff00;
+  text-shadow: 0 0 5px #1eff00;
+  animation: pulseGlow 1s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  from { box-shadow: 0 0 5px #1eff00; }
+  to { box-shadow: 0 0 20px #1eff00, 0 0 40px #1eff00; }
+}
+  
     </style>
 </head>
 <body>
     <div class="icon-bar">
-  <a href="#"><i class="fas fa-home"></i></a>
-  <a href="#"><i class="fas fa-gamepad"></i></a>
-  <a href="#"><i class="fas fa-comments"></i></a>
-  <a href="#"><i class="fas fa-user"></i></a>
   <a href="https://discord.com/invite/bUhB26NxNC" target="_blank" title="Join our Discord">
     <img src="assets/img/discord.png" alt="Discord Icon" class="nav-icon">
   </a>
+
+  <a href="#" id="musicToggle" title="Play music">
+    <i class="fas fa-music"></i>
+    </a>
 </div>
-    <script>alert("Heyo!\n\nCheck out the proxy button :)");</script>
+
+<div id="musicPlayer" style="display:none; position:fixed;
+top:60px; right:20px; background:#000; border:2px solid violet;
+padding:10px; border-radius:15px; z-index:9999;">
+  <audio id="bgAudio" controls>
+    <source src="assets/music/Music.mp3" type="audio/mpeg">
+    Your browser doesn't support audio.
+  </audio>
+</div>
+<div id="idleOverlay" style="display:none; position:fixed; top:0;
+left:0; width:100vw; height:100vh; background:#000; z-index:99999;">
+  <img src="assets/img/Drawing-29.sketchpad.png" alt="Idle Cover" style="width:100%; height:100%; object-fit:cover;">
+  <button onclick="hideIdleOverlay()" style="position:absolute;
+  top:20px; right:20px; padding:10px 20px; font-size:18px;
+  background:#1eff00; border:none; border-radius:10px;
+  color:#000; cursor:pointer;">
+    Resume
+  </button>
+</div>
+
+<div id="idleCountdown" style="
+  position:fixed;
+  top:50px;
+  left:50%;
+  transform:translateX(-50%);
+  background-color:rgba(0,0,0,0.5);
+  color:#1eff00;
+  font-size:18px;
+  padding:6px 12px;
+  border-radius:10px;
+  z-index:9999;
+  font-family:monospace;
+  pointer-events:none;
+">
+  Idle timer: 20:00
+</div>
+
+<script>
+let lastActive = Date.now();
+const idleDuration = 20 * 60 * 1000; // 20 minutes
+const countdownEl =
+document.getElementById("idleCountdown");
+
+function showIdleOverlay() {
+  document.getElementById("idleOverlay").style.display = "block";
+}
+
+function hideIdleOverlay() {
+  document.getElementById("idleOverlay").style.display = "none";
+  lastActive = Date.now(); // Reset timer
+}
+
+// Reset lastActive on any user interaction
+["mousemove", "keydown", "click", "scroll",
+"touchstart"].forEach(event => {
+  document.addEventListener(event, () => {
+    lastActive = Date.now();
+    if (document.getElementById("idleOverlay").style.display === "block") {
+      hideIdleOverlay();
+    }
+  });
+});
+
+// Update countdown every second
+setInterval(() => {
+  const timeLeft = idleDuration - (Date.now() - lastActive);
+  if (timeLeft <= 0) {
+    showIdleOverlay();
+    countdownEl.textContent = "Idle timer: 00:00";
+  } else {
+    const minutes = Math.floor(timeLeft / 60000);
+    const seconds = Math.floor((timeLeft % 60000) / 1000);
+    countdownEl.textContent = `Idle timer:
+  ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }
+}, 1000);
+</script>
+
+  <script>
+function toggleMusicPlayer() {
+  const player = document.getElementById("musicPlayer");
+  const audio = document.getElementById("bgAudio");
+  const musicBtn = document.querySelector(".fa-music").parentElement;
+
+  if (player.style.display === "none") {
+    player.style.display = "block";
+    audio.play();
+    musicBtn.classList.add("active");
+  } else {
+    player.style.display = "none";
+    audio.pause();
+    musicBtn.classList.remove("active");
+  }
+}
+// Attach click listener
+document.getElementById("musicToggle").addEventListener("click", function(e) {
+  e.preventDefault();
+  toggleMusicPlayer();
+});
+      
+    <script>alert("67");</script>
     <div id="videoContainer" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/ctYNBd6t4-g?si=OynAM4zGf6gmVPO9&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
@@ -609,6 +734,15 @@
             <a href="https://discord.gg/jJ5E8ZzQGB">
                 <b><p class="link">Discord</p></b>
               </a>
+            <a href="https://macbooksuper.xyz/scripts/fullscreen-script.html">
+                <b><p class="link">Fullscreen Script</p></b>
+            </a>
+            <a href="https://macbooksuper.xyz/scripts/tab-title-switcher-script.html">
+                <b><p class="link">Tab Title Script</p></b>
+            </a>
+            <a href="https://macbooksuper.xyz/scripts/toggle-inverted-script.html">
+                <b><p class="link">Toggle Inverted Script</p></b>
+            </a>
         <a href="games/GBA/index.html">
             <b><p class="link">GameBoy Adv Emulator</p></b>
           </a>
@@ -654,7 +788,7 @@
     </center>
     <div class="alert">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
-   You may be wondering why some of the games link to macbooksuper. We own it and are just using it for extra storage. PROXY IS OUT! Must be in discord server to use *DISCORD LINK IS* "https://discord.com/invite/jJ5E8ZzQGB"
+    Currently testing an idle safety page so you don't get caught if you accidenly swipe. 
     
     <div class="callout" id="webAppPopup">
     <div class="callout-header">
@@ -662,7 +796,7 @@
       <span class="closebtn" id="closePopup">&times;</span>
     </div>
     <div class="callout-container">
-      <p class="webApp">No more ads! Anyways discord server is this button. </p> <a href="https://discord.gg/jJ5E8ZzQGB">Join!</a>
+      <p class="webApp">No more ads! Anyways discord server is this button. </p> <a href="https://discord.gg/bUhB26NxNC">Join!</a>
     </div>
   </div>
 
