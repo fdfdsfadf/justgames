@@ -203,6 +203,20 @@
   from { box-shadow: 0 0 5px #1eff00; }
   to { box-shadow: 0 0 20px #1eff00, 0 0 40px #1eff00; }
 }
+
+#webAppPopup {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    z-index: 10000 !important;
+    min-width: 300px;
+    max-width: 90vw;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+#webAppPopup .callout-header {
+    font-weight: bold;
+    font-size: 16px;
+}
   
     </style>
 </head>
@@ -807,7 +821,7 @@ document.getElementById("musicToggle").addEventListener("click", function(e) {
         <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
     Currently testing an idle safety page so you don't get caught if you accidenly swipe. 
     
-    <div class="callout" id="webAppPopup">
+    <div class="callout" id="webAppPopup" style="display:none;">
     <div class="callout-header">
       Notification
       <span class="closebtn" id="closePopup">&times;</span>
