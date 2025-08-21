@@ -110,15 +110,24 @@
             animation: scrollText linear infinite;
         }
         @keyframes scrollText { 0% { transform: translateX(100%);} 100% { transform: translateX(-100%);} }
-        .game-list a,
-        .emu-list a {
-            width: 22%;
-            padding: 4px 0;
+        .game-list {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 28px 18px;
+            justify-items: center;
+            width: 98vw;
+            margin: 0 auto;
+        }
+        .game-list a {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 7px 0;
             border-radius: 15px;
             border-width: 1px;
-            margin: 4px 0;
-            display: inline-block;
-            position: relative;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             transition: transform var(--hover-duration) ease, box-shadow var(--hover-duration) ease;
             will-change: transform;
         }
@@ -205,6 +214,16 @@
   to { box-shadow: 0 0 20px #1eff00, 0 0 40px #1eff00; }
 }
 
+@media (max-width: 1100px) {
+  .game-list { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 700px) {
+  .game-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .game-list { grid-template-columns: 1fr; }
+}
+        
 #webAppPopup {
   position: fixed !important;
   bottom: 32px !important;
