@@ -1,10 +1,10 @@
-# Cat Anti-Theft License (CATL) v1.0
+# macbooksuck anti-theft License (MATL) v1.0
 
 **Last Updated: February 9, 2025**  
 **Owner: hu_gaming on discord**  
 
 ## 1. License Scope  
-This website, including all its **code, design, content, media, and any related assets** (hereafter referred to as "the Work"), is made available under the **Cat Anti-Theft License (CATL)**.  
+This website, including all its **code, design, content, media, and any related assets** (hereafter referred to as "the Work"), is made available under the **Macbooksuck Anti-Theft License (MATL)**.  
 
 ## 2. Restrictions & Conditions  
 By accessing, viewing, or interacting with this Work, you **agree** to the following restrictions:  
