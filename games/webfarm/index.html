@@ -19,6 +19,18 @@
              --shovel-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px;"><text x="0" y="24">⛏️</text></svg>') 4 24, auto;
              --animation-duration-fast: 0.18s; --animation-duration-normal: 0.25s; --animation-duration-slow: 0.5s; --animation-duration-very-slow: 1s; --bounce-cubic-bezier: cubic-bezier(0.68, -0.55, 0.27, 1.55); --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
+        /* Watermark */
+        .watermark {
+            position: fixed;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: sans-serif;
+            pointer-events: none;
+            z-index: 9999;
+        }
         /* Animations */
         @keyframes fadeInSlideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
         @keyframes plantPulse{0%{transform:scale(1);filter:brightness(1)}50%{transform:scale(.9);filter:brightness(1.2)}100%{transform:scale(1);filter:brightness(1)}}
