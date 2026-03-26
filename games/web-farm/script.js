@@ -2254,6 +2254,11 @@
                 state.money += 1000000000;
                 addMessage("Promo 'DEV' redeemed: +1B💰!", 'success', true);
             },
+            'lose-1billion': (state) => {
+                state.money += -1000000000;
+                addMessage("Promo 'DEV' redeemed: -1B💰!", 'success', true);
+            },
+                
         };
 
         const redeemPromoCode = () => {
