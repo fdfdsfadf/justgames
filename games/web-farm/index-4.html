@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Farm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header id="top-bar" class="top-bar" role="banner">
+        <div class="top-bar-brand">
+            <img src="https://raw.githubusercontent.com/guahhinc/webfarm/main/carrot.png" alt=""
+                class="top-bar-logo" width="28" height="28">
+            <span class="top-bar-title">Web Farm</span>
+        </div>
+        <div class="top-bar-stats">
+            <span class="top-bar-money">💰 Money: <span id="money">0</span></span>
+            <span id="weather-display" class="top-bar-weather"></span>
+        </div>
+        <button type="button" id="settings-gear-button" onclick="openSettingsPopup()" title="Settings">⚙️</button>
+    </header>
+
+    <div id="game-container">
+        <!-- Farm Area -->
+        <div id="farm-area">
+            <h2 id="farm-name">Your Farm</h2>
+            <div id="farm-grid"><!-- Plots --></div>
+            <div id="farm-grid-actions">
+                <button id="harvest-all-button" onclick="harvestAllReadyCrops()" disabled>🌱 Harvest All</button>
+                <button id="plant-all-button" onclick="plantAllSelectedSeed()" disabled>🌾 Plant All</button>
+            </div>
+            <div id="actions" style="display:none;"></div>
+            <div id="shop">
+                <h3><span style="font-size:1.2em">🛒</span> Shop</h3>
+                <div id="shop-tabs" style="display:flex; gap:5px; margin-bottom:12px;">
+                    <button id="shop-tab-fruits" class="qty-toggle-btn active" onclick="setShopTab('fruits')"
+                        style="flex:1; padding:6px;">🌾 Crops</button>
+                    <button id="shop-tab-gears" class="qty-toggle-btn" onclick="setShopTab('gears')"
+                        style="flex:1; padding:6px;">⚙️ Gears</button>
+                </div>
+                <div id="shop-shared-header" style="margin-bottom:8px;">
+                    <div id="purchase-qty-seeds" style="margin-bottom:6px; display:flex;">
+                        <label style="font-size:0.9em; margin-right:6px;">Seeds Qty:</label>
+                        <button class="qty-toggle-btn qty-seeds active" onclick="setPurchaseQtySeeds(1)">1</button>
+                        <button class="qty-toggle-btn qty-seeds" onclick="setPurchaseQtySeeds(10)">10</button>
+                        <button class="qty-toggle-btn qty-seeds" onclick="setPurchaseQtySeeds(20)">20</button>
+                        <button class="qty-toggle-btn qty-seeds" onclick="setPurchaseQtySeeds(50)">50</button>
+                    </div>
+                    <h4>Shop Status: <span id="shop-refresh-timer"
+                            style="font-weight:normal; font-size:0.85em; color:var(--log-info-color);"></span></h4>
+                </div>
+                <div id="shop-fruits-section">
+                    <h4>🌱 Seeds:</h4>
+                    <ul id="buy-seeds"></ul>
+                </div>
+                <div id="shop-gears-section" style="display:none;">
+                    <h4>⚙️ Gears:</h4>
+                    <ul id="buy-gears"></ul>
+                </div>
+                <div id="farm-upgrades-container">
+                    <h4>Farm Upgrades:</h4><!-- Buttons -->
+                </div>
+            </div>
+            <div id="rebirth-section">
+                <h3><span style="font-size:1.2em">🔄</span> Rebirth</h3>
+                <div id="rebirth-content"></div>
+            </div>
+            <div id="daily-quests">
+                <h3><span style="font-size:1.2em">📅</span> Daily Quests <span id="quest-status-text"
+                        style="font-weight:normal; font-size:0.85em; color:var(--log-error-color);"></span> <span
+                        id="quest-reset-timer"
+                        style="font-weight:normal; font-size:0.85em; color:var(--log-info-color);"></span></h3>
+                <ul id="daily-quests-list"></ul>
+            </div>
+            <div id="save-load">
+                <h2><span style="font-size:1.2em">💾</span> Save / Load</h2>
+                <div class="save-section">
+                    <label for="save-code-output">Your Save Code:</label>
+                    <textarea id="save-code-output" readonly placeholder="Click 'Generate Save Code'"></textarea>
+                    <div class="save-controls">
+                        <button id="generate-save-button" onclick="saveGame()">Generate</button>
+                        <button id="copy-code-button" onclick="copySaveCode()" disabled>Copy</button>
+                    </div>
+                </div>
+                <div class="load-section">
+                    <label for="save-code-input">Load Game from Code:</label>
+                    <textarea id="save-code-input" placeholder="Paste save code here."></textarea>
+                    <div class="save-controls" style="margin-bottom: 0;">
+                        <button id="load-save-button" onclick="loadGamePrompt()">Load</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Area -->
+        <div id="controls-area">
+            <h2>Manage & Trade</h2>
+            <div id="inventory">
+                <h3><span style="font-size:1.2em">🎒</span> Inventory</h3>
+                <div class="inventory-search-row">
+                    <input id="inventory-search-input" type="text" placeholder="Search seeds, gears, and produce…">
+                </div>
+                <h4>Seeds & Gears: <span style="font-size:0.8em; font-weight:normal; color:var(--log-info-color);">(Click to
+                        select, then click empty plot 🟫)</span></h4>
+                <ul id="seed-inventory"></ul>
+                <h4>Produce:</h4>
+                <div id="produce-action-toggle"
+                    style="margin-bottom:8px; margin-top:5px; border-bottom:1px dashed var(--section-border); padding-bottom:10px;">
+                    <label style="font-size:0.9em; margin-right:6px;">Action:</label>
+                    <button class="qty-toggle-btn active" id="action-toggle-sell" onclick="setProduceActionMode('sell')"
+                        style="padding: 4px 8px; font-size: 0.85em;">💵 Sell</button>
+                    <button class="qty-toggle-btn" id="action-toggle-lock" onclick="setProduceActionMode('lock')"
+                        style="padding: 4px 8px; font-size: 0.85em;">🔒 Lock/Unlock</button>
+                </div>
+                <ul id="produce-inventory"></ul>
+                <button id="sell-all-produce-button" onclick="sellAllProduce()" disabled style="margin-top: 10px;">💵
+                    Sell All</button>
+            </div>
+            <div id="achievements">
+                <h3><span style="font-size:1.2em">🏆</span> Achievements</h3>
+                <ul id="achievements-list"></ul>
+            </div>
+            <div id="messages" style="display:none;">
+                <h2>📜 Log</h2><!-- Messages -->
+            </div>
+            <div id="dev-console" style="display:none;">
+                <h3><span style="font-size:1.2em">🛠️</span> Dev Console</h3><label for="dev-command-input"
+                    style="display:block;margin-bottom:5px;font-weight:bold;">Enter Command:</label><input type="text"
+                    id="dev-command-input" placeholder="/help">
+            </div>
+        </div>
+    </div>
+
+    <div id="achievement-popup" class="popup">
+        <span id="ach-popup-icon" class="popup-icon"></span>
+        <div class="popup-text">
+            <span id="ach-popup-title" class="popup-title"></span>
+            <span id="ach-popup-reward" class="popup-reward"></span>
+        </div>
+    </div>
+    <div id="tip-popup" class="popup">
+        <span class="popup-icon">💡</span>
+        <span id="tip-popup-text" class="popup-text"></span>
+    </div>
+
+    <div id="plot-tooltip" class="plot-tooltip">
+        <span id="tooltip-crop-name"></span><br>
+        <span id="tooltip-time-left"></span><br>
+        <span id="tooltip-weight-potential"></span><br>
+        <span id="tooltip-weight-actual"></span><br>
+        <span id="tooltip-sell-multiplier" style="display:none; font-size:0.85em; color:#ffd700;"></span>
+    </div>
+
+    <div id="inventory-tooltip"></div>
+
+    <div id="settings-modal-backdrop">
+        <div id="settings-modal">
+            <div class="settings-modal-header">
+                <h2><span style="font-size:1.2em">⚙️</span> Settings</h2>
+                <button class="settings-modal-close" onclick="closeSettingsPopup()" title="Close">✖</button>
+            </div>
+            <div class="settings-modal-body">
+                <div class="settings-row">
+                    <label for="farm-name-input">Farm Name:</label>
+                    <input id="farm-name-input" type="text" maxlength="32" placeholder="Your Farm">
+                    <button onclick="applyFarmName()">Save</button>
+                </div>
+                <div class="settings-row">
+                    <label>Keybinds:</label>
+                    <div class="settings-keybinds">
+                        <div class="settings-keybind-group">
+                            <span class="settings-keybind-label">Plant All</span>
+                            <input id="keybind-plant-all" type="text" maxlength="1" placeholder="1">
+                        </div>
+                        <div class="settings-keybind-group">
+                            <span class="settings-keybind-label">Harvest All</span>
+                            <input id="keybind-harvest-all" type="text" maxlength="1" placeholder="2">
+                        </div>
+                        <div class="settings-keybind-group">
+                            <span class="settings-keybind-label">Sell All</span>
+                            <input id="keybind-sell-all" type="text" maxlength="1" placeholder="3">
+                        </div>
+                        <button onclick="applyKeybinds()">Save Keys</button>
+                    </div>
+                </div>
+                <div class="settings-row settings-row-promo">
+                    <label for="promo-code-input">Promo Code:</label>
+                    <input id="promo-code-input" type="text" placeholder="Enter promo code" autocomplete="off">
+                    <button type="button" onclick="redeemPromoCode()">Redeem</button>
+                    <p id="promo-code-feedback" class="promo-code-feedback" role="status" aria-live="polite"></p>
+                </div>
+                <div class="settings-row">
+                    <button id="erase-progress-button" onclick="eraseAllProgress()">
+                        Erase All Progress
+                    </button>
+                    <span class="settings-warning-text">This will reset money, farm, quests, and saves after two confirmations.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+    <p style="text-align:center; font-size:0.75em; color:#7f8c8d; margin:15px 0 10px; opacity:0.7;">Web Farm v1.2.6 | Made by Guahh</p>
+</body>
+
+</html>

@@ -1,0 +1,1623 @@
+        /* --- CSS --- */
+        :root {
+            /* Colors, Animations, Cursor */
+            --body-bg: #1f2a36;
+            --container-bg: #34495e;
+            --section-bg: #46607a;
+            --section-border: #5a7a9a;
+            --text-color: #ecf0f1;
+            --heading-color: #98dbaa;
+            --heading-color-sub: #a8eaaa;
+            --accent-color: #86c786;
+            --accent-hover-color: #76b976;
+            --accent-active-color: #67a867;
+            --accent-selected-bg: #c8e8ca;
+            --disabled-color: #7f8c8d;
+            --plot-bg: #6c3e00;
+            --plot-empty-bg: #4f3a2e;
+            --plot-empty-hover-bg: #694f42;
+            --plot-locked-bg: #555;
+            --plot-ready-bg: #507a50;
+            --plot-ready-border: #76c08f;
+            --progress-bar-bg: #8fd0a8;
+            --log-text-color: #bdc3c7;
+            --log-success-color: #98dbaa;
+            --log-error-color: #e74c3c;
+            --log-info-color: #bdc3c7;
+            --log-gold-color: #ffd700;
+            --input-bg: #2c3e50;
+            --input-border: #5a7a9a;
+            --button-text-color: white;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --link-color: #a8eaaa;
+            --achievement-incomplete-color: var(--text-color);
+            --achievement-complete-color: var(--disabled-color);
+            --achievement-complete-icon-filter: grayscale(60%);
+            --button-shadow-color: rgba(0, 0, 0, 0.2);
+            --plot-hover-shadow: rgba(255, 255, 255, 0.1);
+            --ach-desc-color: #bdc3c7;
+            --ach-reward-color: #98dbaa;
+            --log-success-color-rgb: 152, 219, 170;
+            --popup-bg: var(--section-bg);
+            --popup-border: var(--section-border);
+            --popup-text-color: var(--text-color);
+            --popup-title-color: var(--heading-color);
+            --popup-shadow: rgba(0, 0, 0, 0.4);
+            --tip-border-color: var(--link-color);
+            --shovel-cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px;"><text x="0" y="24">⛏️</text></svg>') 4 24, auto;
+            --animation-duration-fast: 0.18s;
+            --animation-duration-normal: 0.25s;
+            --animation-duration-slow: 0.5s;
+            --animation-duration-very-slow: 1s;
+            --bounce-cubic-bezier: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --button-bg: #3d5a6c;
+            --button-hover-bg: var(--section-bg);
+            --top-bar-height: 52px;
+        }
+
+        /* Animations */
+        @keyframes fadeInSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes plantPulse {
+            0% {
+                transform: scale(1);
+                filter: brightness(1)
+            }
+
+            50% {
+                transform: scale(.9);
+                filter: brightness(1.2)
+            }
+
+            100% {
+                transform: scale(1);
+                filter: brightness(1)
+            }
+        }
+
+        @keyframes harvestPop {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                filter: brightness(1.1)
+            }
+
+            70% {
+                transform: scale(1.1);
+                opacity: .4;
+                filter: brightness(1.3)
+            }
+
+            100% {
+                transform: scale(.6);
+                opacity: 0;
+                filter: brightness(1)
+            }
+        }
+
+        @keyframes unlockHighlight {
+            0% {
+                background-color: transparent
+            }
+
+            40% {
+                background-color: rgba(var(--log-success-color-rgb), .3)
+            }
+
+            100% {
+                background-color: transparent
+            }
+        }
+
+        @keyframes selectedPulse {
+            0% {
+                box-shadow: 0 1px 3px var(--button-shadow-color), inset 0 0 0 2px var(--accent-color)
+            }
+
+            50% {
+                box-shadow: 0 1px 3px var(--button-shadow-color), inset 0 0 0 3px var(--accent-hover-color)
+            }
+
+            100% {
+                box-shadow: 0 1px 3px var(--button-shadow-color), inset 0 0 0 2px var(--accent-color)
+            }
+        }
+
+        @keyframes rainbow-bg {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        @keyframes stars-twinkle {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 0.5;
+            }
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            padding: calc(var(--top-bar-height) + 18px + env(safe-area-inset-top, 0px)) 10px 10px 10px;
+            transition: background-color var(--animation-duration-normal) ease, color var(--animation-duration-normal) ease;
+        }
+
+        /* Global subtle text outline for readability without distorting font */
+        body {
+            text-shadow: none;
+            font-synthesis: none;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body * {
+            font-family: inherit;
+        }
+
+        #top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            min-height: var(--top-bar-height);
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px 12px;
+            padding: max(8px, env(safe-area-inset-top, 0px)) 12px 8px max(12px, env(safe-area-inset-left, 0px));
+            padding-right: max(12px, env(safe-area-inset-right, 0px));
+            background: linear-gradient(180deg, var(--container-bg) 0%, var(--body-bg) 100%);
+            border-bottom: 1px solid var(--section-border);
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+
+        .top-bar-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .top-bar-logo {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            vertical-align: middle;
+            transform: scaleX(-1);
+        }
+
+        .top-bar-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            letter-spacing: 0.02em;
+        }
+
+        .top-bar-stats {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 8px 16px;
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+
+        .top-bar-money {
+            font-weight: 700;
+            font-size: 1.15em;
+            color: var(--log-gold-color);
+            white-space: nowrap;
+        }
+
+        .top-bar-weather {
+            font-weight: 600;
+            font-size: 1.05em;
+            color: var(--log-info-color);
+            white-space: nowrap;
+        }
+
+        #game-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1250px;
+            width: 100%;
+            background-color: var(--container-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            transition: background-color var(--animation-duration-normal) ease
+        }
+
+        #farm-area,
+        #controls-area {
+            flex: 1;
+            min-width: 350px;
+            display: flex;
+            flex-direction: column
+        }
+
+        @media (min-width:950px) {
+            #farm-area {
+                flex-grow: 1.4
+            }
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            text-align: center;
+            color: var(--heading-color);
+            margin-top: 5px;
+            margin-bottom: 10px;
+            transition: color var(--animation-duration-normal) ease
+        }
+
+        h1 {
+            margin-bottom: 15px
+        }
+
+        h2 {
+            color: var(--heading-color-sub)
+        }
+
+        h3 {
+            margin-top: 15px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--section-border);
+            padding-bottom: 4px;
+            text-align: left;
+            color: var(--heading-color-sub);
+            transition: color var(--animation-duration-normal) ease, border-color var(--animation-duration-normal) ease
+        }
+
+        h4 {
+            margin-top: 8px;
+            margin-bottom: 4px;
+            font-weight: 400;
+            color: #bdc3c7;
+            text-align: left
+        }
+
+        #farm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 10px;
+            background-color: var(--plot-bg);
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 180px;
+            margin-bottom: 15px;
+            transition: background-color .3s ease, cursor .1s ease;
+            cursor: default
+        }
+
+        #farm-grid:hover {
+            cursor: var(--shovel-cursor)
+        }
+
+        .plot {
+            width: 60px;
+            height: 60px;
+            background-color: var(--plot-empty-bg);
+            border: 1px solid var(--plot-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            position: relative;
+            border-radius: 3px;
+            overflow: hidden;
+            transform-origin: center;
+            transition: background-color var(--animation-duration-normal) ease, border-color var(--animation-duration-normal) ease, transform var(--animation-duration-fast) var(--ease-out-expo), filter var(--animation-duration-fast) ease, box-shadow var(--animation-duration-fast) ease;
+            will-change: transform, filter, box-shadow, background-color
+        }
+
+        .plot:hover:not(.locked) {
+            transform: scale(1.07);
+            filter: brightness(1.1);
+            box-shadow: 0 4px 10px var(--plot-hover-shadow);
+            z-index: 1
+        }
+
+        .plot.empty:hover {
+            background-color: var(--plot-empty-hover-bg)
+        }
+
+        .plot.locked {
+            background-color: var(--plot-locked-bg);
+            cursor: not-allowed;
+            font-size: 18px
+        }
+
+        .plot.locked:hover {
+            filter: none;
+            transform: none;
+            box-shadow: none;
+            z-index: 0;
+            cursor: not-allowed !important
+        }
+
+        .plot .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background-color: var(--progress-bar-bg);
+            width: 0;
+            transition: width .1s linear, background-color var(--animation-duration-normal) ease
+        }
+
+        .plot.ready {
+            background-color: var(--plot-ready-bg);
+            border: 2px solid var(--plot-ready-border)
+        }
+
+        .plot.ready:hover {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+            box-shadow: 0 5px 14px var(--plot-hover-shadow)
+        }
+
+        .plot.plot-plant-animate {
+            animation: plantPulse var(--animation-duration-slow) var(--bounce-cubic-bezier) forwards
+        }
+
+        .plot-content {
+            display: inline-block;
+            transition: transform var(--animation-duration-normal) ease, opacity var(--animation-duration-normal) ease;
+            will-change: transform, opacity;
+            line-height: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .plot-content.status-icon-present {
+            font-size: 20px;
+            letter-spacing: -2px;
+        }
+
+        .plot.plot-harvest-animate .plot-content {
+            animation: harvestPop 0.25s cubic-bezier(.17, .67, .83, .67) forwards;
+        }
+
+        /* Mutation Plot Styles */
+        .plot.plot-is-moonlit {
+            background-color: #4a3d6a;
+        }
+
+        .plot.plot-is-scorched {
+            background-color: #7a4f3a;
+        }
+
+        .plot.plot-is-warm {
+            background-color: #7a703a;
+        }
+
+        .plot.plot-is-cool {
+            background-color: #3a5c7a;
+        }
+
+        .plot.plot-is-shocked {
+            background-color: #4d4023;
+            box-shadow: inset 0 0 12px 2px #f0ff8d;
+            border-color: #f0ff8d;
+        }
+
+        .plot.plot-is-rainbow {
+            background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+            background-size: 200% 200%;
+            animation: rainbow-bg 4s ease infinite;
+        }
+
+        .plot.plot-is-cosmic {
+            background: linear-gradient(230deg, #1d0f3b, #3a236d, #2b1de8);
+            background-size: 150% 150%;
+            animation: rainbow-bg 8s ease-in-out infinite;
+        }
+
+        .plot.plot-is-cosmic::before,
+        .plot.plot-is-cosmic::after,
+        .plot.plot-is-cosmic .plot-content::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 1px;
+            height: 1px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 15px -20px 0 0px white, -10px 18px 0 1px white, 25px 8px 0 0px white, -22px -15px 0 1px white, -5px 5px 0 0px white, 30px 25px 0 0px white;
+            animation: stars-twinkle 3s ease-in-out infinite alternate;
+        }
+
+        .plot.plot-is-cosmic::after {
+            width: 2px;
+            height: 2px;
+            box-shadow: 10px 15px 0 0px white, -18px -10px 0 0px white, -8px 25px 0 0px white;
+            animation-duration: 4.5s;
+        }
+
+        .plot.plot-is-cosmic .plot-content::before {
+            width: 1px;
+            height: 1px;
+            box-shadow: 12px 22px 0 0px white, -25px 5px 0 0px white;
+            animation-duration: 6s;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 5px 3px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: var(--accent-color);
+            color: var(--button-text-color);
+            border: none;
+            border-radius: 4px;
+            vertical-align: middle;
+            font-weight: 500;
+            box-shadow: 0 2px 4px var(--button-shadow-color);
+            transform-origin: center;
+            transition: background-color var(--animation-duration-fast) ease, color var(--animation-duration-fast) ease, transform var(--animation-duration-fast) var(--ease-out-expo), box-shadow var(--animation-duration-fast) ease, filter var(--animation-duration-fast) ease;
+            will-change: transform, filter, box-shadow;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: var(--accent-hover-color);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px var(--button-shadow-color);
+            filter: brightness(1.08);
+        }
+
+        button:active:not(:disabled) {
+            background-color: var(--accent-active-color);
+            transform: scale(.97);
+            box-shadow: 0 1px 3px var(--button-shadow-color);
+            filter: brightness(.92);
+            transition-duration: .06s;
+        }
+
+        button:disabled {
+            background-image: none !important;
+            background-color: var(--disabled-color) !important;
+            color: rgba(255, 255, 255, .7);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            filter: grayscale(40%);
+        }
+
+        .plant-button.selected-plant-button {
+            background-color: var(--accent-selected-bg);
+            color: var(--body-bg);
+            font-weight: bold;
+            filter: brightness(1.05);
+            box-shadow: 0 1px 3px var(--button-shadow-color), inset 0 0 0 2px var(--accent-color);
+            animation: selectedPulse 1.8s ease-in-out infinite
+        }
+
+        .plant-button.selected-plant-button:hover:not(:disabled) {
+            background-color: var(--accent-hover-color);
+            color: var(--button-text-color);
+            filter: brightness(1.1);
+            transform: scale(1.05)
+        }
+
+        .plant-button.selected-plant-button:active:not(:disabled) {
+            background-color: var(--accent-active-color);
+            transform: scale(.97);
+            filter: brightness(.95)
+        }
+
+        .shop-seed-unavailable,
+        .shop-seed-unavailable:hover,
+        .shop-seed-unavailable:active,
+        .shop-seed-rebirth-locked,
+        .shop-seed-rebirth-locked:hover,
+        .shop-seed-rebirth-locked:active {
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+            border-style: solid !important;
+            border-color: var(--log-error-color) !important;
+        }
+
+        .shop-seed-rebirth-locked {
+            border-color: #9b59b6 !important;
+        }
+
+        .shop-seed-unavailable span.shop-tile-name,
+        .shop-seed-unavailable span.shop-tile-price,
+        .shop-seed-rebirth-locked span.shop-tile-name,
+        .shop-seed-rebirth-locked span.shop-tile-price,
+        .shop-seed-rebirth-locked span.shop-tile-stock {
+            color: var(--log-error-color) !important;
+        }
+
+        .shop-seed-rebirth-locked span.shop-tile-stock {
+            color: #9b59b6 !important;
+        }
+
+        #inventory,
+        #shop,
+        #actions,
+        #save-load,
+        #messages,
+        #achievements,
+        #dev-console,
+        #daily-quests {
+            margin-bottom: 15px;
+            background-color: var(--section-bg);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--section-border);
+            transition: background-color var(--animation-duration-normal) ease, border-color var(--animation-duration-normal) ease
+        }
+
+        #inventory ul {
+            list-style: none;
+            padding: 0;
+            margin: 5px 0
+        }
+
+        .inventory-search-row {
+            margin-top: 4px;
+            margin-bottom: 6px;
+        }
+
+        #inventory-search-input {
+            width: 100%;
+            padding: 4px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--input-border);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 0.8em;
+            box-sizing: border-box;
+        }
+
+        #inventory-search-input::placeholder {
+            color: rgba(236, 240, 241, 0.6);
+        }
+
+        #inventory li {
+            margin-bottom: 5px;
+            padding-left: 5px;
+            font-size: 0.95em;
+            border-radius: 3px;
+            user-select: none;
+        }
+
+        #inventory #produce-inventory li {
+            cursor: pointer;
+        }
+
+        #inventory li:hover {
+            background-color: var(--container-bg);
+        }
+
+        .inventory-item-icon {
+            display: inline-block;
+            min-width: 1.2em;
+            text-align: left;
+        }
+
+        #produce-inventory li .inv-tile-name::after {
+            content: attr(data-locked-label);
+            margin-left: 4px;
+            font-size: 0.7em;
+            color: var(--log-info-color);
+        }
+
+        .inventory-weight {
+            font-size: 0.85em;
+            color: var(--log-info-color);
+            margin-left: 5px;
+        }
+
+        .favorite-icon {
+            color: #e74c3c;
+            margin-right: 4px;
+        }
+
+        #sell-produce-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px
+        }
+
+        #messages {
+            height: 180px;
+            overflow-y: scroll;
+            font-size: .9em;
+            color: var(--log-text-color);
+            transition: color var(--animation-duration-normal) ease;
+            scroll-behavior: smooth;
+            padding-top: 5px
+        }
+
+        #messages h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            text-align: left;
+            border-bottom: none;
+            padding-bottom: 0;
+            color: var(--heading-color-sub)
+        }
+
+        #messages p {
+            margin: 0 0 5px;
+            padding-left: 2px;
+            white-space: pre-wrap;
+            opacity: 0;
+            animation: fadeInSlideDown var(--animation-duration-slow) ease-out forwards
+        }
+
+        #messages p.log-success {
+            color: var(--log-success-color);
+            font-weight: 700
+        }
+
+        #messages p.log-error {
+            color: var(--log-error-color);
+            font-weight: 700
+        }
+
+        #messages p.log-info {
+            color: var(--log-info-color)
+        }
+
+        #messages p.log-gold {
+            color: var(--log-gold-color);
+            font-weight: 700
+        }
+
+        #messages p.log-dev {
+            color: var(--link-color);
+            font-family: monospace;
+            font-weight: bold
+        }
+
+        #save-load h2,
+        #dev-console h3,
+        #daily-quests h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: left
+        }
+
+        #save-load textarea,
+        #dev-command-input {
+            width: calc(100% - 12px);
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: .9em;
+            font-family: monospace;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--input-border);
+            border-radius: 3px;
+            padding: 5px;
+            cursor: text;
+            transition: background-color var(--animation-duration-normal) ease, color var(--animation-duration-normal) ease, border-color var(--animation-duration-normal) ease
+        }
+
+        #save-load textarea {
+            min-height: 60px;
+            resize: vertical
+        }
+
+        #dev-command-input {
+            min-height: auto;
+            resize: none
+        }
+
+        #save-code-output {
+            background-color: var(--input-bg);
+            cursor: default
+        }
+
+        .save-controls,
+        .mod-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .mod-controls {
+            margin-top: 15px;
+            border-top: 1px dashed var(--section-border);
+            padding-top: 10px;
+        }
+
+        #mod-file-input {
+            font-size: 0.9em;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--input-border);
+            border-radius: 3px;
+            padding: 4px 6px;
+            max-width: calc(100% - 110px);
+            cursor: pointer;
+            transition: background-color var(--animation-duration-normal) ease, color var(--animation-duration-normal) ease, border-color var(--animation-duration-normal) ease;
+        }
+
+        #mod-file-input::file-selector-button {
+            padding: 4px 8px;
+            margin-right: 8px;
+            font-size: 0.9em;
+            cursor: pointer;
+            background-color: var(--accent-color);
+            color: var(--button-text-color);
+            border: none;
+            border-radius: 3px;
+            transition: background-color var(--animation-duration-fast) ease;
+        }
+
+        #mod-file-input::file-selector-button:hover {
+            background-color: var(--accent-hover-color);
+        }
+
+        #farm-upgrades-container {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--section-border);
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        #achievements ul {
+            list-style: none;
+            padding: 0;
+            margin: 0
+        }
+
+        #achievements li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 5px 0;
+            margin-bottom: 5px;
+            border-bottom: 1px solid rgba(128, 128, 128, .1);
+            transition: background-color var(--animation-duration-normal) ease
+        }
+
+        #achievements li:last-child {
+            border-bottom: none
+        }
+
+        #achievements li:hover:not(.completed) {
+            background-color: rgba(128, 128, 128, .05)
+        }
+
+        #achievements .ach-icon {
+            font-size: 1.6em;
+            min-width: 1.6em;
+            text-align: center;
+            margin-top: 2px
+        }
+
+        #achievements .ach-details {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            gap: 2px
+        }
+
+        #achievements .ach-name {
+            font-weight: 700;
+            font-size: 1em;
+            line-height: 1.2
+        }
+
+        #achievements .ach-desc-reward {
+            line-height: 1.3;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 8px
+        }
+
+        #achievements .ach-desc {
+            font-size: .85em;
+            color: var(--ach-desc-color)
+        }
+
+        #achievements .ach-reward {
+            font-size: .85em;
+            font-style: italic;
+            color: var(--ach-reward-color);
+            font-weight: 500;
+            white-space: nowrap
+        }
+
+        #achievements li.completed {
+            color: var(--achievement-complete-color)
+        }
+
+        #achievements li.completed .ach-icon {
+            filter: var(--achievement-complete-icon-filter)
+        }
+
+        #achievements li.completed .ach-name::after {
+            content: " ✔️";
+            color: var(--log-success-color);
+            font-weight: 400;
+            margin-left: 4px
+        }
+
+        #achievements li.completed .ach-desc,
+        #achievements li.completed .ach-reward {
+            color: var(--achievement-complete-color);
+            font-style: normal
+        }
+
+        #achievements li.completed:hover {
+            background-color: transparent
+        }
+
+        #achievements li.incomplete {
+            color: var(--achievement-incomplete-color)
+        }
+
+        #achievements li.achievement-unlocked-animate {
+            animation: unlockHighlight var(--animation-duration-very-slow) ease-out
+        }
+
+        .popup {
+            position: fixed;
+            padding: 12px 18px;
+            border-radius: 6px;
+            background-color: var(--popup-bg);
+            border: 1px solid var(--popup-border);
+            box-shadow: 0 4px 12px var(--popup-shadow);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--animation-duration-normal) ease-out, transform var(--animation-duration-normal) ease-out;
+            pointer-events: none;
+            min-width: 250px;
+            max-width: 400px;
+        }
+
+        .popup.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .popup-icon {
+            font-size: 2em;
+            flex-shrink: 0;
+        }
+
+        .popup-text {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            font-size: 0.95em;
+            color: var(--popup-text-color);
+            line-height: 1.3;
+        }
+
+        .popup-title {
+            font-weight: bold;
+            color: var(--popup-title-color);
+        }
+
+        .popup-reward {
+            font-style: italic;
+            color: var(--ach-reward-color);
+            font-size: 0.9em;
+        }
+
+        #achievement-popup {
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            border-left: 5px solid var(--log-success-color);
+        }
+
+        #achievement-popup.active {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        #tip-popup {
+            bottom: 20px;
+            right: 20px;
+            border-left: 5px solid var(--tip-border-color);
+        }
+
+        #tip-popup .popup-icon {
+            font-size: 1.6em;
+        }
+
+        #actions {
+            position: relative;
+        }
+
+        /* harvest-all-button styles now handled by #farm-grid-actions button */
+
+        #harvest-all-button:hover:not(:disabled) {
+            background-color: var(--accent-hover-color);
+        }
+
+        #sell-all-produce-button {
+            padding: 6px 10px;
+            font-size: 0.85em;
+            margin-top: 10px;
+            background-color: var(--accent-active-color);
+            display: block;
+            width: fit-content;
+        }
+
+        #sell-all-produce-button:hover:not(:disabled) {
+            background-color: var(--accent-hover-color);
+        }
+
+
+        #plot-tooltip {
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            line-height: 1.3;
+            z-index: 1010;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s ease-in-out;
+            max-width: 220px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            word-wrap: break-word;
+        }
+
+        #plot-tooltip.visible {
+            opacity: 1;
+        }
+
+        #plot-tooltip span {
+            display: inline-block;
+        }
+
+        #tooltip-crop-name {
+            font-weight: bold;
+        }
+
+        #tooltip-time-left {
+            font-size: 0.9em;
+            color: #eee;
+        }
+
+        #tooltip-weight-potential,
+        #tooltip-weight-actual {
+            font-size: 0.85em;
+            color: #ddd;
+        }
+
+        #daily-quests-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #daily-quests-list li {
+            background-color: var(--container-bg);
+            padding: 8px 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        #daily-quests-list li.quest-completed:not(.quest-claimed) {
+            border-left-color: var(--log-success-color);
+        }
+
+        #daily-quests-list li.quest-claimed {
+            border-left-color: var(--disabled-color);
+            opacity: 0.7;
+        }
+
+        .quest-title {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .quest-desc {
+            font-size: 0.9em;
+            color: var(--ach-desc-color);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .quest-progress-bar-container {
+            height: 8px;
+            background-color: var(--body-bg);
+            border-radius: 4px;
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+
+        .quest-progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--progress-bar-bg);
+            transition: width 0.2s ease-out;
+        }
+
+        .quest-reward-text {
+            font-size: 0.85em;
+            color: var(--ach-reward-color);
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+
+        .quest-claim-button {
+            font-size: 0.9em !important;
+            padding: 4px 8px !important;
+            margin-top: 5px !important;
+        }
+
+        /* Silver Mutation Plot Style */
+        .plot.plot-is-silver {
+            background-color: #6b7b8d;
+            box-shadow: inset 0 0 10px 2px #c0c0c0;
+            border-color: #c0c0c0;
+        }
+
+        /* Locked Fruit Indicator on Plot */
+        .plot .lock-indicator {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            font-size: 10px;
+            z-index: 5;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.15s ease;
+        }
+
+        .plot .lock-indicator:hover {
+            opacity: 1;
+        }
+
+        .plot.plot-fruit-locked {
+            outline: 2px dashed #e67e22;
+            outline-offset: -2px;
+        }
+
+        /* Unified Inventory & Shop Grids */
+        #seed-inventory,
+        #produce-inventory,
+        #gear-inventory,
+        #buy-seeds,
+        #buy-gears,
+        #planting-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 6px;
+            list-style: none;
+            padding: 0;
+            margin: 0 0 10px 0;
+        }
+
+        #seed-inventory li,
+        #produce-inventory li,
+        #gear-inventory li,
+        #buy-seeds button,
+        #buy-gears button,
+        .plant-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 4px;
+            border-radius: 6px;
+            background-color: var(--container-bg);
+            border: 1px solid var(--section-border);
+            transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+            font-size: 0.85em;
+            min-height: 90px;
+            height: 100%;
+            position: relative;
+            user-select: none;
+            box-sizing: border-box;
+            text-align: center;
+            font-family: inherit;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        /* Hide seed quantity controls when viewing gear shop */
+        .shop-gears-active #purchase-qty-seeds {
+            display: none !important;
+        }
+
+        #seed-inventory li.seed-selected,
+        #seed-inventory li.gear-selected,
+        #gear-inventory li.gear-selected,
+        .selected-plant-button {
+            border-color: var(--accent-color);
+            background-color: var(--button-bg);
+            box-shadow: 0 0 5px rgba(230, 126, 34, 0.5);
+            animation: selectedPulse 1.8s ease-in-out infinite;
+        }
+
+        .selected-plant-button {
+            border-color: #2ecc71;
+            background-color: rgba(46, 204, 113, 0.1);
+            box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+        }
+
+        #seed-inventory li.seed-no-stock,
+        #seed-inventory li.seed-rebirth-locked,
+        .plant-button.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            border-style: solid;
+            background-color: #7f8c8d;
+            border-color: #95a5a6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        #seed-inventory li.seed-rebirth-locked {
+            border-color: #9b59b6;
+            background-color: rgba(155, 89, 182, 0.15);
+        }
+
+        #seed-inventory li:hover:not(.seed-no-stock):not(.seed-rebirth-locked),
+        #produce-inventory li:hover,
+        #gear-inventory li:hover,
+        .plant-button:hover:not(.disabled):not(.shop-seed-unavailable):not(.shop-seed-rebirth-locked) {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            background-color: var(--section-bg);
+        }
+
+        .plant-button:active:not(.disabled):not(.shop-seed-unavailable):not(.shop-seed-rebirth-locked) {
+            transform: scale(0.95);
+        }
+
+        .empty-grid-msg {
+            grid-column: 1 / -1;
+            display: block !important;
+            text-align: left !important;
+            padding: 5px !important;
+            border: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            color: var(--log-text-color) !important;
+            font-size: 0.9em !important;
+            font-style: italic;
+            cursor: default !important;
+            opacity: 0.8;
+            min-height: auto !important;
+        }
+
+        .empty-grid-msg:hover {
+            transform: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .inv-tile-icon,
+        .shop-tile-icon {
+            font-size: 1.5em;
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+
+        /* Unified crop image sizing across all UI */
+        .inv-tile-icon img,
+        .shop-tile-icon img,
+        .plant-button img,
+        .plot-content img {
+            height: 1.6em !important;
+            width: 1.6em !important;
+        }
+
+        .inv-tile-name,
+        .shop-tile-name {
+            font-size: 0.7em;
+            color: var(--text-color);
+            opacity: 0.7;
+            text-align: center;
+            line-height: 1.2;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .inv-tile-count,
+        .shop-tile-price {
+            font-size: 0.85em;
+            color: var(--log-info-color);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .inv-tile-sell {
+            font-size: 0.7em;
+            color: var(--log-gold-color);
+            opacity: 0.85;
+        }
+
+        .inv-tile-fav {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            font-size: 0.7em;
+            line-height: 1;
+        }
+
+
+
+        /* Inventory Tooltip */
+        #inventory-tooltip {
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            line-height: 1.4;
+            z-index: 1010;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.1s ease-in-out;
+            max-width: 240px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            word-wrap: break-word;
+        }
+
+        #inventory-tooltip.visible {
+            opacity: 1;
+        }
+
+        #inventory-tooltip .inv-tt-name {
+            font-weight: bold;
+            font-size: 1.05em;
+            margin-bottom: 2px;
+        }
+
+        #inventory-tooltip .inv-tt-detail {
+            font-size: 0.95em;
+            color: #ccc;
+        }
+
+        #inventory-tooltip .inv-tt-weight {
+            font-size: 0.9em;
+            color: #aad;
+        }
+
+        /* Rebirth Section */
+        #rebirth-section {
+            margin-bottom: 15px;
+            background-color: var(--section-bg);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--section-border);
+            transition: background-color var(--animation-duration-normal) ease, border-color var(--animation-duration-normal) ease;
+        }
+
+        #rebirth-section h3 {
+            color: #f0c040;
+        }
+
+        .rebirth-info {
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            color: var(--log-info-color);
+        }
+
+        .rebirth-info strong {
+            color: var(--text-color);
+        }
+
+        /* Purchase Qty Toggle */
+        .qty-toggle-btn {
+            padding: 4px 10px;
+            font-size: 12px;
+            margin: 0 2px;
+            background-color: var(--disabled-color);
+            border-radius: 4px;
+        }
+
+        .qty-toggle-btn.active {
+            background-color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .qty-toggle-btn:hover:not(:disabled) {
+            background-color: var(--accent-hover-color);
+        }
+
+        /* Farm Grid Action Buttons */
+        #farm-grid-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            align-items: stretch;
+        }
+
+        #farm-grid-actions button {
+            flex: 1;
+            font-size: 14px;
+            padding: 8px 12px;
+            box-sizing: border-box;
+        }
+
+        /* Gears CSS */
+        .gear-inv-item {
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .gear-inv-item:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        .gear-selected {
+            background-color: var(--button-bg);
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .plot-has-gear {
+            position: relative;
+        }
+
+        .gear-overlay {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            font-size: 0.75em;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .title-carrot-icon {
+            height: 1.4em;
+            width: 1.4em;
+            vertical-align: middle;
+            object-fit: contain;
+            transform: scaleX(-1);
+        }
+
+        .shop-tile-icon {
+            font-size: 1.2em;
+            margin-right: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        .shop-tile-icon img {
+            display: block;
+            margin: 0 auto 3px auto;
+        }
+
+        .shop-tile-name {
+            flex-grow: 1;
+            font-weight: bold;
+        }
+
+        .shop-tile-price {
+            color: var(--text-color);
+        }
+
+        .shop-tile-stock {
+            font-size: 0.8em;
+            color: var(--log-info-color);
+        }
+
+        /* Settings gear (in top bar) */
+        #settings-gear-button {
+            position: relative;
+            flex-shrink: 0;
+            padding: 4px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35em;
+            background: var(--section-bg);
+            border: 1px solid var(--section-border);
+            border-radius: 6px;
+            box-shadow: none;
+            z-index: 1;
+        }
+
+        #settings-gear-button:hover {
+            transform: scale(1.06);
+            background: var(--button-hover-bg);
+        }
+
+        /* Settings shared row layout */
+        .settings-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        #promo-code-input,
+        #farm-name-input {
+            flex: 1;
+            min-width: 140px;
+            max-width: 260px;
+            font-size: 0.9em;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            border: 1px solid var(--input-border);
+            border-radius: 3px;
+            padding: 4px 6px;
+        }
+
+        .settings-warning-text {
+            font-size: 0.8em;
+            color: var(--log-error-color);
+            flex: 1 1 160px;
+        }
+
+        .settings-row-promo #promo-code-feedback {
+            flex-basis: 100%;
+            order: 10;
+        }
+
+        .promo-code-feedback {
+            margin: 0;
+            min-height: 1.25em;
+            font-size: 0.85em;
+            line-height: 1.35;
+        }
+
+        .promo-code-feedback:empty {
+            display: none;
+        }
+
+        .promo-code-feedback.promo-code-feedback--error {
+            color: var(--log-error-color);
+        }
+
+        /* Settings modal */
+        #settings-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1200;
+        }
+
+        #settings-modal-backdrop.active {
+            display: flex;
+        }
+
+        #settings-modal {
+            background-color: var(--section-bg);
+            border-radius: 8px;
+            border: 1px solid var(--section-border);
+            padding: 14px 16px;
+            min-width: 280px;
+            max-width: 420px;
+            box-shadow: 0 6px 14px var(--shadow-color);
+        }
+
+        .settings-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .settings-modal-header h2 {
+            margin: 0;
+        }
+
+        .settings-modal-close {
+            background-color: #e74c3c;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px var(--button-shadow-color);
+            line-height: 1;
+        }
+
+        .settings-modal-close:hover:not(:disabled) {
+            background-color: #d64535;
+        }
+
+        .settings-modal-close:active:not(:disabled) {
+            background-color: #c23b2d;
+        }
+
+        .settings-modal-body {
+            margin-top: 4px;
+        }
+
+        .settings-keybinds {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .settings-keybind-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+
+        .settings-keybind-label {
+            font-size: 0.8em;
+            color: var(--log-info-color);
+        }
+
+        .settings-keybind-group input {
+            width: 32px;
+            text-align: center;
+            padding: 3px 4px;
+            border-radius: 4px;
+            border: 1px solid var(--input-border);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 0.85em;
+        }
