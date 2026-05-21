@@ -1,7 +1,7 @@
         /* --- CSS --- */
         :root {
             /* Colors, Animations, Cursor */
-            --body-bg: #1f2a36;
+            --body-bg: #161e27;
             --container-bg: #34495e;
             --section-bg: #46607a;
             --section-border: #5a7a9a;
@@ -203,7 +203,7 @@
             gap: 8px 12px;
             padding: max(8px, env(safe-area-inset-top, 0px)) 12px 8px max(12px, env(safe-area-inset-left, 0px));
             padding-right: max(12px, env(safe-area-inset-right, 0px));
-            background: linear-gradient(180deg, var(--container-bg) 0%, var(--container-bg) 70%, var(--section-bg) 100%);
+            background: var(--container-bg);
             border-bottom: 1px solid var(--section-border);
             box-shadow: 0 2px 6px var(--shadow-color);
         }
