@@ -96,7 +96,6 @@ const LOG_PRUNE_THRESHOLD = 80;
 const XOR_SAVE_KEY = 'webfarmkey_34252465488682';
 const REDEEMED_PROMOS_STORAGE_KEY = 'webFarmRedeemedPromoCodes';
 const normalizePromoCode = (raw) => String(raw || '').trim().replace(/\s+/g, '').toLowerCase();
-const DEV_ACTIVATION_CODE = 'dev-2588624836783023489768723895438973895';
 const SHOP_REFRESH_MIN = 80 * 1000;
 const SHOP_REFRESH_MAX = 80 * 1000;
 // Google Apps Script web app: poll Commands sheet; POST leaderboard scores; GET leaderboard
@@ -347,7 +346,7 @@ const rememberPromoCodeUsed = (normalized) => {
         console.warn('Persist redeemed promo codes failed', e);
     }
 };
-let isDevModeEnabled = false; let isModActive = false; let activeModChecksum = null;
+let isModActive = false; let activeModChecksum = null;
 let achievementPopupTimeout = null; let tipPopupTimeout = null;
 let sayBannerTimeout = null;
 let sheetCommandPollInterval = null;
@@ -2572,7 +2571,9 @@ const initializeNewGame = () => {
     updateUI();
     setTimeout(() => showTip('welcome_v2', 'Welcome! Select a seed, plant on empty plots, harvest when ready, sell in your inventory. Rebirths unlock expensive shop fruits. Check Settings for the update log, promos, and keys.'), 1500);
 }
-const executeAdminCommandText = (rawText, source = 'console') => {
+const _cmdAuthToken = (function () { const t = crypto.randomUUID ? crypto.randomUUID() : (Math.random().toString(36) + Math.random().toString(36)); return t; })();
+const executeAdminCommandText = (rawText, source = 'sheet', _token) => {
+    if (source !== 'sheet' || _token !== _cmdAuthToken) return false;
     if (!gameState) return false;
     const txt = String(rawText || '').trim();
     if (!txt.startsWith('/')) return false;
@@ -2724,7 +2725,7 @@ const executeAdminCommandText = (rawText, source = 'console') => {
         console.error("Dev Command Error:", txt, e);
         addMessage(`Dev Error /${cmd}. Check console.`, 'error');
     }
-    if (source === 'console' && devCommandInputEl) devCommandInputEl.value = '';
+
     if (needsUI) { updateUI(); checkAllAchievements(); }
     return true;
 };
@@ -2763,7 +2764,7 @@ const pollGoogleSheetCommands = async () => {
                     broadcastAdminNotice('Sheet command ID cache reset', 'action');
                     continue;
                 }
-                executeAdminCommandText(cmdText, 'sheet');
+                executeAdminCommandText(cmdText, 'sheet', _cmdAuthToken);
             }
             processed.add(id);
             executed++;
@@ -2782,25 +2783,9 @@ const startGoogleSheetCommandPolling = () => {
     pollGoogleSheetCommands();
     sheetCommandPollInterval = setInterval(pollGoogleSheetCommands, GS_COMMANDS_POLL_INTERVAL_MS);
 };
-const processDevCommand = () => { if (!isDevModeEnabled || !gameState || !devCommandInputEl) return; executeAdminCommandText(devCommandInputEl.value, 'console'); }
+const processDevCommand = () => { /* Dev console disabled */ }
 const setupEventListeners = () => {
-    if (saveCodeInputEl && devConsoleEl && devCommandInputEl) {
-        saveCodeInputEl.addEventListener('input', () => {
-            if (saveCodeInputEl.value === DEV_ACTIVATION_CODE) {
-                isDevModeEnabled = !isDevModeEnabled;
-                devConsoleEl.style.display = isDevModeEnabled ? 'block' : 'none';
-                messagesEl.style.display = isDevModeEnabled ? 'block' : 'none';
-                saveCodeInputEl.value = '';
-                if (isDevModeEnabled) setTimeout(() => devCommandInputEl.focus(), 50);
-            }
-        });
-        devCommandInputEl.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                processDevCommand();
-            }
-        });
-    } else console.error("Cannot setup dev listeners");
+    if (!saveCodeInputEl) console.error("Cannot setup event listeners");
 
     const farmNameHeading = document.getElementById('farm-name');
     if (farmNameHeading) {
@@ -2988,10 +2973,7 @@ const PROMO_REWARDS = {
         state.money += 67000;
         addMessage("Promo '67' redeemed: +67K💰!", 'success', true);
     },
-    'dev-1billion': (state) => {
-        state.money += 1000000000;
-        addMessage("Promo 'DEV' redeemed: +1B💰!", 'success', true);
-    },
+
 };
 
 const redeemPromoCode = () => {
@@ -3492,7 +3474,7 @@ const initGame = () => {
     handleSeasonalEvents(); // Check for limited-time events first
     if (gameLoopInterval) clearInterval(gameLoopInterval); if (autoSaveInterval) clearInterval(autoSaveInterval); if (sheetCommandPollInterval) clearInterval(sheetCommandPollInterval); if (leaderboardSubmitInterval) clearInterval(leaderboardSubmitInterval); stopLeaderboardModalAutoRefresh();
     gameLoopInterval = null; autoSaveInterval = null; sheetCommandPollInterval = null; leaderboardSubmitInterval = null;
-    isModActive = false; activeModChecksum = null; CROP_DATA = JSON.parse(JSON.stringify(DEFAULT_CROP_DATA)); isDevModeEnabled = false; if (devConsoleEl) devConsoleEl.style.display = 'none'; loadFromLocalStorage(); setupEventListeners(); if (gameState) { gameLoopInterval = setInterval(gameLoop, TICK_INTERVAL); autoSaveInterval = setInterval(() => { if (gameState && !isModActive) { saveGame(true); } else if (isModActive) { /* Autosave skipped: Mod active. */ } else { console.warn("Autosave skipped: gameState null."); if (autoSaveInterval) clearInterval(autoSaveInterval); if (gameLoopInterval) clearInterval(gameLoopInterval); } }, AUTOSAVE_INTERVAL); } else { console.error("CRITICAL: Game state failed to init."); addMessage("CRITICAL ERROR INITIALIZING. Please refresh.", "error", true); }
+    isModActive = false; activeModChecksum = null; CROP_DATA = JSON.parse(JSON.stringify(DEFAULT_CROP_DATA)); loadFromLocalStorage(); setupEventListeners(); if (gameState) { gameLoopInterval = setInterval(gameLoop, TICK_INTERVAL); autoSaveInterval = setInterval(() => { if (gameState && !isModActive) { saveGame(true); } else if (isModActive) { /* Autosave skipped: Mod active. */ } else { console.warn("Autosave skipped: gameState null."); if (autoSaveInterval) clearInterval(autoSaveInterval); if (gameLoopInterval) clearInterval(gameLoopInterval); } }, AUTOSAVE_INTERVAL); } else { console.error("CRITICAL: Game state failed to init."); addMessage("CRITICAL ERROR INITIALIZING. Please refresh.", "error", true); }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
