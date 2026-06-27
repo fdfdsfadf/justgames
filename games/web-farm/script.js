@@ -91,11 +91,12 @@ const QUEST_DEFINITIONS = [
 
 const INITIAL_PLOTS = 3; const MAX_PLOTS = 45; const PLOT_COST_BASE = 75; const PLOT_COST_INCREASE_FACTOR = 1.4;
 const TICK_INTERVAL = 100; const AUTOSAVE_INTERVAL = 5000;
-const SAVE_CODE_VERSION = '1.3.1';
+const SAVE_CODE_VERSION = '1.3.2';
 const LOG_PRUNE_THRESHOLD = 80;
 const XOR_SAVE_KEY = 'webfarmkey_34252465488682';
 const REDEEMED_PROMOS_STORAGE_KEY = 'webFarmRedeemedPromoCodes';
 const normalizePromoCode = (raw) => String(raw || '').trim().replace(/\s+/g, '').toLowerCase();
+const DEV_ACTIVATION_CODE = 'dev-2588624836783023489768723895438973895';
 const SHOP_REFRESH_MIN = 80 * 1000;
 const SHOP_REFRESH_MAX = 80 * 1000;
 // Google Apps Script web app: poll Commands sheet; POST leaderboard scores; GET leaderboard
@@ -346,7 +347,7 @@ const rememberPromoCodeUsed = (normalized) => {
         console.warn('Persist redeemed promo codes failed', e);
     }
 };
-let isModActive = false; let activeModChecksum = null;
+let isDevModeEnabled = false; let isModActive = false; let activeModChecksum = null;
 let achievementPopupTimeout = null; let tipPopupTimeout = null;
 let sayBannerTimeout = null;
 let sheetCommandPollInterval = null;
@@ -576,14 +577,28 @@ const submitLeaderboardScoreViaGet = async () => {
     const farmName = typeof gameState.farmName === 'string' && gameState.farmName.trim().length > 0
         ? gameState.farmName.trim().slice(0, 32)
         : 'Your Farm';
+
+    const moneyStr = String(Math.max(0, Math.floor(gameState.money || 0)));
+    const netWorthStr = String(computeFarmNetWorth());
+    const rebirthsStr = String(Math.max(0, gameState.rebirthCount || 0));
+    const growthLevelStr = String(Math.max(0, gameState.growthSpeedLevel || 0));
+
+    if (moneyStr.toLowerCase().includes('e') || moneyStr.toLowerCase().includes('nan') || moneyStr.toLowerCase().includes('inf') ||
+        netWorthStr.toLowerCase().includes('e') || netWorthStr.toLowerCase().includes('nan') || netWorthStr.toLowerCase().includes('inf') ||
+        rebirthsStr.toLowerCase().includes('e') || rebirthsStr.toLowerCase().includes('nan') || rebirthsStr.toLowerCase().includes('inf') ||
+        growthLevelStr.toLowerCase().includes('e') || growthLevelStr.toLowerCase().includes('nan') || growthLevelStr.toLowerCase().includes('inf')) {
+        logAppsScript('submitScore skipped: money or value has notation errors/e');
+        return null;
+    }
+
     const params = {
         action: 'submitScore',
         clientId,
         farmName,
-        money: String(Math.max(0, Math.floor(gameState.money || 0))),
-        netWorth: String(computeFarmNetWorth()),
-        rebirths: String(Math.max(0, gameState.rebirthCount || 0)),
-        growthLevel: String(Math.max(0, gameState.growthSpeedLevel || 0)),
+        money: moneyStr,
+        netWorth: netWorthStr,
+        rebirths: rebirthsStr,
+        growthLevel: growthLevelStr,
     };
     if (GS_LEADERBOARD_SECRET) params.secret = GS_LEADERBOARD_SECRET;
     const out = await leaderboardRequestJsonpThenGet(params);
@@ -1695,7 +1710,7 @@ const gameLoop = () => {
         needsUpdate = true;
     }
 
-    if (needsUpdate) updateUI(); else updateProgressBars();
+    if (needsUpdate) updateUI(true); else updateProgressBars();
 }
 const calculateGrowthProgress = (p) => {
     if (p?.state !== 'growing' || !p.growDuration) return 0;
@@ -1856,11 +1871,15 @@ const setShopBuyQtyMode = (mode) => {
 
 let uiUpdateTimeout = null;
 let lastUpdateTime = 0;
-const updateUI = () => {
+const updateUI = (force = false) => {
     const now = Date.now();
-    if (now - lastUpdateTime < 50) {
+    if (!force && (now - lastUpdateTime < 50)) {
         if (!uiUpdateTimeout) uiUpdateTimeout = setTimeout(() => { uiUpdateTimeout = null; updateUI(); }, 50 - (now - lastUpdateTime));
         return;
+    }
+    if (uiUpdateTimeout) {
+        clearTimeout(uiUpdateTimeout);
+        uiUpdateTimeout = null;
     }
     lastUpdateTime = now;
 
@@ -2571,9 +2590,7 @@ const initializeNewGame = () => {
     updateUI();
     setTimeout(() => showTip('welcome_v2', 'Welcome! Select a seed, plant on empty plots, harvest when ready, sell in your inventory. Rebirths unlock expensive shop fruits. Check Settings for the update log, promos, and keys.'), 1500);
 }
-const _cmdAuthToken = (function () { const t = crypto.randomUUID ? crypto.randomUUID() : (Math.random().toString(36) + Math.random().toString(36)); return t; })();
-const executeAdminCommandText = (rawText, source = 'sheet', _token) => {
-    if (source !== 'sheet' || _token !== _cmdAuthToken) return false;
+const executeAdminCommandText = (rawText, source = 'console') => {
     if (!gameState) return false;
     const txt = String(rawText || '').trim();
     if (!txt.startsWith('/')) return false;
@@ -2725,7 +2742,7 @@ const executeAdminCommandText = (rawText, source = 'sheet', _token) => {
         console.error("Dev Command Error:", txt, e);
         addMessage(`Dev Error /${cmd}. Check console.`, 'error');
     }
-
+    if (source === 'console' && devCommandInputEl) devCommandInputEl.value = '';
     if (needsUI) { updateUI(); checkAllAchievements(); }
     return true;
 };
@@ -2764,7 +2781,7 @@ const pollGoogleSheetCommands = async () => {
                     broadcastAdminNotice('Sheet command ID cache reset', 'action');
                     continue;
                 }
-                executeAdminCommandText(cmdText, 'sheet', _cmdAuthToken);
+                executeAdminCommandText(cmdText, 'sheet');
             }
             processed.add(id);
             executed++;
@@ -2783,9 +2800,25 @@ const startGoogleSheetCommandPolling = () => {
     pollGoogleSheetCommands();
     sheetCommandPollInterval = setInterval(pollGoogleSheetCommands, GS_COMMANDS_POLL_INTERVAL_MS);
 };
-const processDevCommand = () => { /* Dev console disabled */ }
+const processDevCommand = () => { if (!isDevModeEnabled || !gameState || !devCommandInputEl) return; executeAdminCommandText(devCommandInputEl.value, 'console'); }
 const setupEventListeners = () => {
-    if (!saveCodeInputEl) console.error("Cannot setup event listeners");
+    if (saveCodeInputEl && devConsoleEl && devCommandInputEl) {
+        saveCodeInputEl.addEventListener('input', () => {
+            if (saveCodeInputEl.value === DEV_ACTIVATION_CODE) {
+                isDevModeEnabled = !isDevModeEnabled;
+                devConsoleEl.style.display = isDevModeEnabled ? 'block' : 'none';
+                messagesEl.style.display = isDevModeEnabled ? 'block' : 'none';
+                saveCodeInputEl.value = '';
+                if (isDevModeEnabled) setTimeout(() => devCommandInputEl.focus(), 50);
+            }
+        });
+        devCommandInputEl.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                processDevCommand();
+            }
+        });
+    } else console.error("Cannot setup dev listeners");
 
     const farmNameHeading = document.getElementById('farm-name');
     if (farmNameHeading) {
@@ -2973,7 +3006,10 @@ const PROMO_REWARDS = {
         state.money += 67000;
         addMessage("Promo '67' redeemed: +67K💰!", 'success', true);
     },
-
+    'dev-1billion': (state) => {
+        state.money += 1000000000;
+        addMessage("Promo 'DEV' redeemed: +1B💰!", 'success', true);
+    },
 };
 
 const redeemPromoCode = () => {
@@ -3114,6 +3150,14 @@ const closeSettingsPopup = () => {
 };
 
 const UPDATE_LOG_ENTRIES = [
+    {
+        id: '1.3.2',
+        title: 'v1.3.2 Freeze Fix & Leaderboard Filtering',
+        changes: [
+            'Fixed game loop freezing/stuck visual updates when crops finish growing',
+            'Filtered leaderboard entries containing scientific notation or error values',
+        ],
+    },
     {
         id: '1.3.1',
         title: 'v1.3.1 Extra Plots!',
@@ -3341,7 +3385,20 @@ const renderLeaderboardFetchFailedUI = () => {
 };
 const sortLeaderboardEntries = (entries) => {
     if (!Array.isArray(entries)) return [];
-    return [...entries].sort((a, b) => {
+    const filtered = entries.filter(e => {
+        if (!e) return false;
+        const moneyStr = String(e.money || '').toLowerCase();
+        const netWorthStr = String(e.netWorth || '').toLowerCase();
+        const rebirthsStr = String(e.rebirths || '').toLowerCase();
+        const growthLevelStr = String(e.growthLevel || '').toLowerCase();
+
+        if (moneyStr.includes('e') || moneyStr.includes('nan') || moneyStr.includes('inf')) return false;
+        if (netWorthStr.includes('e') || netWorthStr.includes('nan') || netWorthStr.includes('inf')) return false;
+        if (rebirthsStr.includes('e') || rebirthsStr.includes('nan') || rebirthsStr.includes('inf')) return false;
+        if (growthLevelStr.includes('e') || growthLevelStr.includes('nan') || growthLevelStr.includes('inf')) return false;
+        return true;
+    });
+    return [...filtered].sort((a, b) => {
         const rbA = Number(a.rebirths) || 0;
         const rbB = Number(b.rebirths) || 0;
         if (rbB !== rbA) return rbB - rbA;
@@ -3474,7 +3531,7 @@ const initGame = () => {
     handleSeasonalEvents(); // Check for limited-time events first
     if (gameLoopInterval) clearInterval(gameLoopInterval); if (autoSaveInterval) clearInterval(autoSaveInterval); if (sheetCommandPollInterval) clearInterval(sheetCommandPollInterval); if (leaderboardSubmitInterval) clearInterval(leaderboardSubmitInterval); stopLeaderboardModalAutoRefresh();
     gameLoopInterval = null; autoSaveInterval = null; sheetCommandPollInterval = null; leaderboardSubmitInterval = null;
-    isModActive = false; activeModChecksum = null; CROP_DATA = JSON.parse(JSON.stringify(DEFAULT_CROP_DATA)); loadFromLocalStorage(); setupEventListeners(); if (gameState) { gameLoopInterval = setInterval(gameLoop, TICK_INTERVAL); autoSaveInterval = setInterval(() => { if (gameState && !isModActive) { saveGame(true); } else if (isModActive) { /* Autosave skipped: Mod active. */ } else { console.warn("Autosave skipped: gameState null."); if (autoSaveInterval) clearInterval(autoSaveInterval); if (gameLoopInterval) clearInterval(gameLoopInterval); } }, AUTOSAVE_INTERVAL); } else { console.error("CRITICAL: Game state failed to init."); addMessage("CRITICAL ERROR INITIALIZING. Please refresh.", "error", true); }
+    isModActive = false; activeModChecksum = null; CROP_DATA = JSON.parse(JSON.stringify(DEFAULT_CROP_DATA)); isDevModeEnabled = false; if (devConsoleEl) devConsoleEl.style.display = 'none'; loadFromLocalStorage(); setupEventListeners(); if (gameState) { gameLoopInterval = setInterval(gameLoop, TICK_INTERVAL); autoSaveInterval = setInterval(() => { if (gameState && !isModActive) { saveGame(true); } else if (isModActive) { /* Autosave skipped: Mod active. */ } else { console.warn("Autosave skipped: gameState null."); if (autoSaveInterval) clearInterval(autoSaveInterval); if (gameLoopInterval) clearInterval(gameLoopInterval); } }, AUTOSAVE_INTERVAL); } else { console.error("CRITICAL: Game state failed to init."); addMessage("CRITICAL ERROR INITIALIZING. Please refresh.", "error", true); }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
